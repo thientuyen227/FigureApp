@@ -101,7 +101,6 @@
         android:layout_marginTop="5dp"
         android:text="or you had a account?"
         android:textSize="16sp"
-        app:layout_constraintEnd_toStartOf="@+id/textLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
 
@@ -109,14 +108,15 @@
         android:id="@+id/textLogin"
         android:layout_width="59dp"
         android:layout_height="28dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="93dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="84dp"
+        android:clickable="true"
+        android:onClick="onClick"
         android:text="Login"
         android:textAllCaps="false"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView3"
         app:layout_constraintTop_toBottomOf="@+id/btn_signup" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

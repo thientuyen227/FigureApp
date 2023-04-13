@@ -89,13 +89,15 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(SignupActivity.this,"Dang ky that bai", Toast.LENGTH_SHORT).show();
                     }
                 });
-                txtLogin.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // Chuyển sang màn hình Đăng nhập
-                        startActivity(new Intent(SignupActivity.this, LoginActivity.class));
-                    }
-                });
+
+            }
+        });
+        txtLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Chuyển sang màn hình Đăng nhập
+                Intent intent =new Intent(SignupActivity.this,LoginActivity.class);
+                startActivity(intent);
             }
         });
     }
