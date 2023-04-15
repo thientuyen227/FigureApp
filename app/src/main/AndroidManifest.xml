@@ -14,10 +14,16 @@
         android:theme="@style/Theme.FigureApp"
         tools:targetApi="31">
         <activity
+            android:name=".BaseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".IntroActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -26,7 +32,7 @@
             android:name=".LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".IntroActivity"
+            android:name=".HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

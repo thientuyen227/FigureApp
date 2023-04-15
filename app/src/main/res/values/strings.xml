@@ -10,5 +10,7 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="shopping_cart_icon_description">Mô tả cho biểu tượng giỏ hàng</string>
+    <string name="home_icon_description">Mô tả cho biểu tượng home</string>
+    <string name="profile_icon_description">Mô tả cho biểu tượng profile</string>
 
 </resources>
