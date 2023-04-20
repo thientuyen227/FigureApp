@@ -19,6 +19,21 @@
             android:layout_weight="1"
             android:orientation="vertical"
             android:padding="16dp">
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="8dp"
+                app:iconifiedByDefault="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:queryHint="Search here...">
+
+            </androidx.appcompat.widget.SearchView>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,7 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:theme="@style/Animation.Design.BottomSheetDialog"
-            app:backgroundTint="#3F51B5"
+            app:backgroundTint="@color/white"
             app:fabAlignmentMode="center"
             app:fabCradleMargin="8dp"
             app:fabCradleRoundedCornerRadius="16dp"
@@ -81,6 +96,16 @@
                 app:backgroundTint="@color/white"
                 app:maxImageSize="35dp"
                 app:tint="@color/black" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_cart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                app:backgroundTint="@color/white"
+                app:tint="@color/black"
+                android:layout_marginRight="12dp"
+                app:maxImageSize="35dp"
+                android:src="@drawable/ic_baseline_shopping_cart_24"/>
         </com.google.android.material.bottomappbar.BottomAppBar>
     </FrameLayout>
 
