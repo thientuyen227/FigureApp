@@ -23,7 +23,7 @@
             android:padding="16dp">
 
             <ImageView
-                android:id="@+id/iv_avatar"
+                android:id="@+id/im_avatar"
                 android:layout_width="113dp"
                 android:layout_height="112dp"
                 android:layout_gravity="center"
@@ -136,38 +136,19 @@
             </LinearLayout>
 
             <Button
+                android:id="@+id/btn_logout"
                 android:layout_width="194dp"
                 android:layout_height="wrap_content"
-                android:text="Logout"
-                android:backgroundTint="@color/colorPrimary"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:layout_gravity="center"></Button>
+                android:backgroundTint="@color/colorPrimary"
+                android:text="Logout"></Button>
 
         </LinearLayout>
 
 
     </androidx.core.widget.NestedScrollView>
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#3F51B5"
-        android:layout_gravity="bottom">
-
-        <!-- content here -->
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_home"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/home_icon_description"
-            android:src="@drawable/ic_home"
-            app:backgroundTint="@color/white"
-            app:maxImageSize="35dp"
-            app:tint="@color/black" />
-    </FrameLayout>
+    <include layout="@layout/activity_bottom_app_bar"/>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

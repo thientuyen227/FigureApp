@@ -17,7 +17,7 @@ public class IntroActivity extends AppCompatActivity {
         btnStart = findViewById(R.id.btnStart);
     }
     public void onClick(View v){
-        Intent intent =new Intent(IntroActivity.this,SignupActivity.class);
+        Intent intent =new Intent(IntroActivity.this,LoginActivity.class);
         startActivity(intent);
     }
 }

@@ -7,9 +7,9 @@ import retrofit2.http.POST;
 
 public interface IUserService {
     @FormUrlEncoded
-    @POST("/shoppingapp/registrationapi.php?apicall=login")
+    @POST("/users/login")
     Call<Response> logIn(@Field("username") String username, @Field("password") String password);
     @FormUrlEncoded
-    @POST("/shoppingapp/registrationapi.php?apicall=signup")
+    @POST("/users/signup")
     Call<Response> signUp(@Field("email") String email, @Field("username") String username, @Field("password") String password);
 }

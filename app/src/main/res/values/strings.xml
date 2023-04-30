@@ -12,5 +12,10 @@
     <string name="shopping_cart_icon_description">Mô tả cho biểu tượng giỏ hàng</string>
     <string name="home_icon_description">Mô tả cho biểu tượng home</string>
     <string name="profile_icon_description">Mô tả cho biểu tượng profile</string>
+    <string name="home_button_description">về lại trang chủ</string>
+    <string name="follow_button_description">Các sản phẩm đã được theo dõi</string>
+    <string name="settings_button_description">Vào trang settings</string>
+    <string name="dashboard_button_description">Dashboard</string>
+    <string name="cart_button_description">về lại trang chủ</string>
 
 </resources>

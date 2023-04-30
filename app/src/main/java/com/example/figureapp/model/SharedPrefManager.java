@@ -31,7 +31,7 @@ public class SharedPrefManager {
         SharedPreferences. Editor editor = sharedPreferences.edit();
         editor.putString (KEY_USERNAME, user.getName());
         editor.putString (KEY_EMAIL, user.getEmail());
-        editor.putString (KEY_PASSWORD, user.getPassword());
+        editor.putString(KEY_PASSWORD, user.getPassword());
         editor.apply();
     }
     //this method will checker whether user is already logged in or not

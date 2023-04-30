@@ -29,7 +29,7 @@ public class SignupActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
 
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
             finish();
@@ -79,8 +79,9 @@ public class SignupActivity extends AppCompatActivity {
                             User user = new User(username,email,password);
                             SharedPrefManager.getInstance(SignupActivity.this).userLogin(user);
                             //Chuyen sang Login neu thanh cong
-                            Intent intent =new Intent(SignupActivity.this,LoginActivity.class);
+                            Intent intent =new Intent(SignupActivity.this,HomeActivity.class);
                             startActivity(intent);
+                            finish();
                         }
                     }
 

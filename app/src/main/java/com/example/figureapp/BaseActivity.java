@@ -11,7 +11,7 @@ import android.widget.LinearLayout;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends BottomAppBarActivity {
 
     ImageView btnProfile, btnCart;
 
@@ -28,10 +28,9 @@ public class BaseActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    protected void setUpActionBar() {
+    protected void setUpActionBar(String title) {
         ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle("FigureApp");
+        actionBar.setTitle(title);
         actionBar.setBackgroundDrawable(getResources().getDrawable(R.color.colorPrimary));
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "336294767245",
+    "project_id": "figureapp-b8eb4",
+    "storage_bucket": "figureapp-b8eb4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336294767245:android:57e85baca4928cab8810c4",
+        "android_client_info": {
+          "package_name": "com.example.figureapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "336294767245-0gcj1v1gi4qckiv27risdslkavghf6rc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIaW4z6U14I38sxuteWEUx20Cuqo9fdsA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "336294767245-0gcj1v1gi4qckiv27risdslkavghf6rc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

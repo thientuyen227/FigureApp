@@ -8,10 +8,11 @@
 
     <!-- Content -->
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true">
+        android:layout_height="676dp"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,6 +35,17 @@
 
             </androidx.appcompat.widget.SearchView>
 
+            <LinearLayout
+                android:layout_width="332dp"
+                android:layout_height="86dp"
+                android:layout_gravity="center"
+                android:background="@color/colorPrimary"
+                android:backgroundTint="@color/colorPrimary"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,72 +53,41 @@
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_width="382dp"
+                android:layout_height="213dp"
                 android:orientation="horizontal">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/category_recyclerview"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:text="Last Product"
                 android:textColor="#000000"
                 android:textSize="24sp"
                 android:textStyle="bold" />
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/product_recyclerview"
-                android:layout_width="389dp"
-                android:layout_height="325dp" />
+
+            <LinearLayout
+                android:layout_width="386dp"
+                android:layout_height="268dp"
+                android:layout_weight="2"
+                android:orientation="vertical">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/product_recyclerview"
+                    android:layout_width="392dp"
+                    android:layout_height="213dp" />
+            </LinearLayout>
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-
-    <FrameLayout
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_gravity="bottom">
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottombar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:theme="@style/Animation.Design.BottomSheetDialog"
-            app:backgroundTint="@color/white"
-            app:fabAlignmentMode="center"
-            app:fabCradleMargin="8dp"
-            app:fabCradleRoundedCornerRadius="16dp"
-            app:hideOnScroll="true"
-            tools:ignore="BottomAppBar">
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:contentDescription="@string/home_icon_description"
-                android:src="@drawable/ic_home"
-                app:backgroundTint="@color/white"
-                app:maxImageSize="35dp"
-                app:tint="@color/black" />
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_cart"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                app:backgroundTint="@color/white"
-                app:tint="@color/black"
-                android:layout_marginRight="12dp"
-                app:maxImageSize="35dp"
-                android:src="@drawable/ic_baseline_shopping_cart_24"/>
-        </com.google.android.material.bottomappbar.BottomAppBar>
-    </FrameLayout>
+    <include layout="@layout/activity_bottom_app_bar"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
