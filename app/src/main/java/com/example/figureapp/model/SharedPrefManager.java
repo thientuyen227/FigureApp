@@ -5,6 +5,7 @@ import static android.accounts.AccountManager.KEY_PASSWORD;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 import com.example.figureapp.LoginActivity;
 
@@ -12,6 +13,7 @@ public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
 
     private static final String KEY_USERNAME = "keyusername";
+    private static final String KEY_TOKEN = "keytoken";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_PASSWORD = "keypassword";
     private static SharedPrefManager mInstance;
@@ -47,7 +49,7 @@ public class SharedPrefManager {
                 sharedPreferences.getString (KEY_EMAIL,  null),
                 sharedPreferences.getString (KEY_PASSWORD, null)
         );
-        }
+    }
     //this method will logout the user
     public void logout() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences (SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -55,5 +57,16 @@ public class SharedPrefManager {
         editor.clear();
         editor.apply();
         ctx.startActivity(new Intent(ctx, LoginActivity.class));}
+    public void saveToken(String token) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ctx);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY_TOKEN, token);
+        editor.apply();
+    }
+
+    public String getToken() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ctx);
+        return sharedPreferences.getString(KEY_TOKEN, "");
+    }
 
 }

@@ -12,12 +12,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.figureapp.model.SharedPrefManager;
+import com.example.figureapp.model.TokenModel;
 import com.example.figureapp.model.User;
 import com.example.figureapp.service.BaseAPIService;
 import com.example.figureapp.service.IUserService;
 import com.example.figureapp.service.Response;
 
 import org.w3c.dom.Text;
+
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,21 +70,26 @@ public class LoginActivity extends AppCompatActivity {
                         if (response.isSuccessful()){
                             Response loginsuceess = response.body();
                             Toast.makeText(LoginActivity.this, "Đăng nhập thanh cong", Toast.LENGTH_SHORT).show();
-//                            User user = new User(
-//                                    loginsuceess.getUser().getName(),
-//                                    loginsuceess.getUser().getEmail(),
-//                                    loginsuceess.getUser().getPassword()
-//                            );
-//                            SharedPrefManager.getInstance(getApplicationContext()).userLogin(user);
+                            TokenModel token = new TokenModel(
+                                    loginsuceess.getToken().getToken()
+                            );
+                            SharedPrefManager.getInstance(getApplicationContext()).saveToken(token.getToken());
                             finish();
                             Intent intent =new Intent(LoginActivity.this,HomeActivity.class);
                             startActivity(intent);
                         }
+                        else {
+                                Toast.makeText(LoginActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
+                        }
                     }
-
                     @Override
                     public void onFailure(Call<Response> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this,"Tài khoản hoặc mật khẩu không đúng", Toast.LENGTH_SHORT).show();
+                        Log.e("LoginActivity", "Login request failed", t);
+                        if (t instanceof IOException) {
+                            Toast.makeText(LoginActivity.this, "Lỗi kết nối. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Lỗi không xác định. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
 

@@ -1,16 +1,27 @@
 package com.example.figureapp.service;
 
+import com.example.figureapp.model.TokenModel;
 import com.example.figureapp.model.User;
 
 public class Response {
     private boolean error;
     private String message;
     private User user;
+    private TokenModel token;
 
-    public Response(boolean error, String message, User user) {
+    public TokenModel getToken() {
+        return token;
+    }
+
+    public void setToken(TokenModel token) {
+        this.token = token;
+    }
+
+    public Response(boolean error, String message, User user, String token) {
         this.error = error;
         this.message = message;
         this.user = user;
+        this.token = new TokenModel(token);
     }
 
     public boolean isError() {
