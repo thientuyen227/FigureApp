@@ -17,6 +17,7 @@ import com.example.figureapp.model.User;
 import com.example.figureapp.service.BaseAPIService;
 import com.example.figureapp.service.IUserService;
 import com.example.figureapp.service.Response;
+import com.google.gson.Gson;
 
 import org.w3c.dom.Text;
 
@@ -68,15 +69,15 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                         if (response.isSuccessful()){
-                            Response loginsuceess = response.body();
-                            Toast.makeText(LoginActivity.this, "Đăng nhập thanh cong", Toast.LENGTH_SHORT).show();
-                            TokenModel token = new TokenModel(
-                                    loginsuceess.getToken().getToken()
-                            );
-                            SharedPrefManager.getInstance(getApplicationContext()).saveToken(token.getToken());
+                            String jsonResponse = response.body().toString(); // lấy chuỗi JSON trả về từ API
+                            Gson gson = new Gson();
+                            TokenModel tokenModel = gson.fromJson(jsonResponse, TokenModel.class);
+                            SharedPrefManager.getInstance(getApplicationContext()).saveToken(tokenModel.getToken());
                             finish();
-                            Intent intent =new Intent(LoginActivity.this,HomeActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
+
+
                         }
                         else {
                                 Toast.makeText(LoginActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();

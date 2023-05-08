@@ -50,7 +50,7 @@ router.get('/', function(req, res, next) {
       }
     } else {
       // Thêm mới user vào bảng user
-      connection.query('INSERT INTO user (username, email, password) VALUES (?, ?, ?)', [username, email, password], (err, result) => {
+      connection.query('INSERT INTO user (userName,email,password) VALUES (?, ?, ?)', [username, email, password], (err, result) => {
         if (err) throw err;
 
         // Trả về thông tin user vừa tạo
