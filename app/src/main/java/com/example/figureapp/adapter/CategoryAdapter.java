@@ -19,6 +19,8 @@ import com.example.figureapp.model.CategoryModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import coil.Coil;
+
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
 
     List<CategoryModel> categories;
@@ -40,7 +42,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CategoryModel category = categories.get(position);
-        Glide.with(context).load(category.getImages()).into(holder.categoryImage);
+        ImageView imageView = holder.categoryImage;
+        //Glide.with(context).load(category.getImages()).into(holder.categoryImage);
         holder.categoryTitle.setText(category.getName());
 //        holder.categoryImage.setImageBitmap(bitmap);
 //        Glide.with(context).load(category.getImages()).into(holder.categoryImage);

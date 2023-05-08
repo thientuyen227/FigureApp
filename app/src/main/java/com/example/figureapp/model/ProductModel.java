@@ -1,19 +1,10 @@
 package com.example.figureapp.model;
 
-public class ProductModel {
+public class ProductModel extends AbstractModel<ProductModel> {
     private String name, description, imageProduct;
-    private int id;
     private int idProduct;
     private int idCategory;
 
-    public ProductModel(String name, String description, String imageProduct, int id, int idProduct, int idCategory) {
-        this.name = name;
-        this.description = description;
-        this.imageProduct = imageProduct;
-        this.id = id;
-        this.idProduct = idProduct;
-        this.idCategory = idCategory;
-    }
 
     public String getName() {
         return name;
@@ -38,15 +29,6 @@ public class ProductModel {
     public void setImageProduct(String imageProduct) {
         this.imageProduct = imageProduct;
     }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public int getIdProduct() {
         return idProduct;
     }

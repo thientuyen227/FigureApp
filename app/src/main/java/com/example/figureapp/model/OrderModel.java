@@ -2,28 +2,11 @@ package com.example.figureapp.model;
 
 import java.util.List;
 
-public class OrderModel {
-    private int id;
+public class OrderModel extends AbstractModel<OrderModel> {
     private int userId;
     private int storeId;
     private User user;
     private List<OrderItemModel> orderitems;
-
-    public OrderModel(int id, int userId, int storeId, User user, List<OrderItemModel> orderitems) {
-        this.id = id;
-        this.userId = userId;
-        this.storeId = storeId;
-        this.user = user;
-        this.orderitems = orderitems;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getUserId() {
         return userId;

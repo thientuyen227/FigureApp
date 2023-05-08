@@ -60,7 +60,6 @@ public class HomeActivity extends BaseActivity {
                     });
                 }
             }
-
             @Override
             public void onFailure(Call<ArrayList<CategoryModel>> call, Throwable t) {
                 Log.d("error", t.getMessage());

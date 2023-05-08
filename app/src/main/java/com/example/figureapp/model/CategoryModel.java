@@ -1,22 +1,7 @@
 package com.example.figureapp.model;
 
-public class CategoryModel {
-    String id, name, images, description;
-
-    public CategoryModel(String id, String name, String images, String description) {
-        this.id = id;
-        this.name = name;
-        this.images = images;
-        this.description = description;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
+public class CategoryModel extends AbstractModel<CategoryModel> {
+    String name, images, description;
 
     public String getName() {
         return name;

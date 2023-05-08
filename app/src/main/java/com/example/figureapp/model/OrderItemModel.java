@@ -1,6 +1,6 @@
 package com.example.figureapp.model;
 
-public class OrderItemModel {
+public class OrderItemModel extends AbstractModel<OrderItemModel> {
     private int ordersId ;
     private int productId;
     private int count;

@@ -1,20 +1,16 @@
 package com.example.figureapp.model;
 
-import java.io.Serializable;
-
-public class User implements Serializable {
+public class User extends AbstractModel<User> {
     private String name;
     private String email;
 
-    private String password;
     public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;
     }
 
-    public User() {
-    }
+    private String password;
 
 
     public String getName() {

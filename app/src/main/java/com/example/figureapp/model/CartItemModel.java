@@ -1,27 +1,10 @@
 package com.example.figureapp.model;
 
-public class CartItemModel {
-    private int id;
-    private int cartId;
-    private int productId;
-    private int cout;
-    private ProductModel productModel;
-
-    public CartItemModel(int id, int cartId, int productId, int cout, ProductModel productModel) {
-        this.id = id;
-        this.cartId = cartId;
-        this.productId = productId;
-        this.cout = cout;
-        this.productModel = productModel;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
+public class CartItemModel extends AbstractModel<CartItemModel>{
+    private int cartId    ;
+    private int productId ;
+    private int count     ;
+    private ProductModel product;
 
     public int getCartId() {
         return cartId;
@@ -39,19 +22,20 @@ public class CartItemModel {
         this.productId = productId;
     }
 
-    public int getCout() {
-        return cout;
+    public int getCount() {
+        return count;
     }
 
-    public void setCout(int cout) {
-        this.cout = cout;
+    public void setCount(int count) {
+        this.count = count;
     }
 
     public ProductModel getProductModel() {
-        return productModel;
+        return product;
     }
 
-    public void setProductModel(ProductModel productModel) {
-        this.productModel = productModel;
+    public void setProductModel(ProductModel product) {
+        this.product = product;
     }
+
 }

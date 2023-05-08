@@ -11,10 +11,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface IProductService {
-    @GET("/appfoods/lastproduct.php")
+    @GET("/product/listproducts")
     Call<ArrayList<ProductModel>> getAllProducts();
 
-    @FormUrlEncoded
-    @POST("/appfoods/getcategory.php")
-    Call<ArrayList<ProductModel>> getCategoryItem(@Field("idcategory") int id);
 }
