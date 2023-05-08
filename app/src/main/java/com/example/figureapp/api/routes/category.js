@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 //List category
 router.get('/listcategories', function(req, res, next){
-    const sql = 'select category.nameCategory, image_category.address from category inner join Image_Category on category.idcategory = Image_Category.categoryid';
+    const sql = 'select category.nameCategory as name, image_category.address as images from category inner join Image_Category on category.idcategory = Image_Category.categoryid';
     connection.query(sql, (err, result) => {
         if (err) throw err;
         res.json(result);
