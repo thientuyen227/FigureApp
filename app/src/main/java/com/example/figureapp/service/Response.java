@@ -7,13 +7,18 @@ public class Response {
     private boolean error;
     private String message;
     private User user;
-    private TokenModel token;
 
-    public TokenModel getToken() {
+    public Response(String token) {
+        this.token = token;
+    }
+
+    private String token;
+
+    public String getToken() {
         return token;
     }
 
-    public void setToken(TokenModel token) {
+    public void setToken(String token) {
         this.token = token;
     }
 
@@ -21,7 +26,6 @@ public class Response {
         this.error = error;
         this.message = message;
         this.user = user;
-        this.token = new TokenModel(token);
     }
 
     public boolean isError() {

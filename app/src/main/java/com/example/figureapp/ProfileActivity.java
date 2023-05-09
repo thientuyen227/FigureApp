@@ -35,7 +35,7 @@ public class ProfileActivity extends BaseActivity {
             User user = SharedPrefManager.getInstance(this).getUser();
             //tv_id.setText(String.valueOf(user.get));
             tv_name.setText(user.getName());
-            tv_email.setText(user.getEmail());
+            tv_email.setText(user.getUserName());
             //gender.setText(user.getGender());
             //Glide.with(getApplicationContext()).load(user.getImages()).into(imageViewporfile);
             btn_logout.setOnClickListener(this::onClick);

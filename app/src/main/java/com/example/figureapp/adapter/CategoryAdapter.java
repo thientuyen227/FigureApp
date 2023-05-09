@@ -2,6 +2,7 @@ package com.example.figureapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.figureapp.ListProductInCategoryActivity;
 import com.example.figureapp.R;
 import com.example.figureapp.SelectListener;
 import com.example.figureapp.model.CategoryModel;
@@ -44,10 +46,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         CategoryModel category = categories.get(position);
         Glide.with(context).load(category.getImages()).into(holder.categoryImage);
         holder.categoryTitle.setText(category.getName());
-        System.out.println(holder.categoryTitle);
-
-//        holder.categoryImage.setImageBitmap(bitmap);
-//        Glide.with(context).load(category.getImages()).into(holder.categoryImage);
+        holder.setItemClickListener(new SelectListener() {
+            @Override
+            public void onItemClicked(View view, int position, boolean isLongClick) {
+                Intent intent = new Intent(context, ListProductInCategoryActivity.class);
+                intent.putExtra("categoryId", category.getId());
+                context.startActivity(intent);
+            }
+        });
     }
     @SuppressLint("NotifyDataSetChanged")
     public void updateCategories(ArrayList<CategoryModel> categories){

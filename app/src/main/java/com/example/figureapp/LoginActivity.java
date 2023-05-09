@@ -37,10 +37,11 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-//        if(SharedPrefManager.getInstance(this).isLoggedIn()){
-//            finish();
-//            startActivity(new Intent(LoginActivity.this,MainActivity.class));
-//        }
+        if(SharedPrefManager.getInstance(this).isLoggedIn()){
+
+            finish();
+            startActivity(new Intent(LoginActivity.this,HomeActivity.class));
+        }
 
         editTextUsername =findViewById(R.id.editTextUsername);
         editTextPassword = findViewById(R.id.editTextPassword);
@@ -69,15 +70,12 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                         if (response.isSuccessful()){
-                            String jsonResponse = response.body().toString(); // lấy chuỗi JSON trả về từ API
-                            Gson gson = new Gson();
-                            TokenModel tokenModel = gson.fromJson(jsonResponse, TokenModel.class);
-                            SharedPrefManager.getInstance(getApplicationContext()).saveToken(tokenModel.getToken());
+                            Response jsonResponse = response.body(); // lấy chuỗi JSON trả về từ API4
+                            String token = jsonResponse.getToken();
+                            SharedPrefManager.getInstance(getApplicationContext()).saveToken(token);
                             finish();
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);
-
-
                         }
                         else {
                                 Toast.makeText(LoginActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();

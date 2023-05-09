@@ -2,6 +2,7 @@ package com.example.figureapp.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.figureapp.DetailProductActivity;
 import com.example.figureapp.R;
 import com.example.figureapp.SelectListener;
 import com.example.figureapp.model.ProductModel;
@@ -40,6 +42,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         ProductModel product = products.get(position);
         Glide.with(context).load(product.getImageProduct()).into(holder.ProductImage);
         holder.ProductTitle.setText(product.getName());
+        holder.setItemClickListener(new SelectListener() {
+            @Override
+            public void onItemClicked(View view, int position, boolean isLongClick) {
+                Intent intent = new Intent(context, DetailProductActivity.class);
+                intent.putExtra("id", product.getId());
+                context.startActivity(intent);
+            }
+        });
     }
     @SuppressLint("NotifyDataSetChanged")
     public void updateProducts(ArrayList<ProductModel> products){

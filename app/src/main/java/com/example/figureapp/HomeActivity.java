@@ -4,6 +4,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -52,12 +53,6 @@ public class HomeActivity extends BaseActivity {
                     LinearLayoutManager linearLayoutManager = new LinearLayoutManager(HomeActivity.this, LinearLayoutManager.HORIZONTAL, false);
                     categoryRecyclerView.setLayoutManager(linearLayoutManager);
                     categoryRecyclerView.setAdapter(categoryAdapter);
-                    categoryAdapter.setOnItemClickListener(new OnItemClickListener() {
-                        @Override
-                        public void onItemClick(int position, View view) {
-                            Log.d("TAG", "Hello");
-                        }
-                    });
                 }
             }
             @Override

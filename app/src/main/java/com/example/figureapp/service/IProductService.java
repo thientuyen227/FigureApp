@@ -13,5 +13,7 @@ import retrofit2.http.POST;
 public interface IProductService {
     @GET("/product/listproducts")
     Call<ArrayList<ProductModel>> getAllProducts();
-
+    @FormUrlEncoded
+    @POST("/product/detailproduct")
+    Call<ArrayList<ProductModel>> getDetailProduct(@Field("id") int id);
 }

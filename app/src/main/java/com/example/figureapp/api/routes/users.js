@@ -15,20 +15,20 @@ router.get('/', function(req, res, next) {
   router.post('/login', function(req, res, next)  {
     const { username, password } = req.body;
   
-    // Query MySQL database to get user with matching username
-    const sql = `SELECT * FROM user WHERE email = '${username}' AND password = '${password}'`;
+    // Query MySQL database to get user with matching username?
+    const sql = 'SELECT * FROM user WHERE username = ? AND password = ?';
 
-    connection.query(sql, (error, results) => {
+    connection.query(sql, [username, password], (error, results) => {
       if (error) throw error;
       console.log(results);
   
       if (results.length > 0) {
-        // Nếu đúng, trả về mã thông báo (token) để sử dụng cho các yêu cầu khác
+        // Nếu đúng, trả về mã thông  báo (token) đểsử dụng cho các yêu cầu khác
         const token = jwt.sign({userid: results.id}, 'nm9aZv1wGP1r2qE6RoVqSQihv3f0BQOU', {expiresIn: '3d'});
-        res.json({ success: true, token });
+        res.json({ success: true, token: token});
       } else {
         // Nếu sai, trả về thông báo lỗi
-        res.status(401).json({ success: false, message: 'Invalid username or password' });
+        res.status(401).json({ success: false, token: 'Invalid username or password' });
       }
     });
   });
@@ -57,6 +57,8 @@ router.get('/', function(req, res, next) {
         const newUser = { id: result.insertId, username, email, password };
         return res.status(201).json(newUser);
       });
+
+      
     }
   });
 });

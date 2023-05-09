@@ -7,7 +7,11 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.auth0.android.jwt.JWT;
 import com.example.figureapp.LoginActivity;
+
+import java.util.Calendar;
+import java.util.Objects;
 
 public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
@@ -32,14 +36,19 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences (SHARED_PREF_NAME, Context.MODE_PRIVATE);
         SharedPreferences. Editor editor = sharedPreferences.edit();
         editor.putString (KEY_USERNAME, user.getName());
-        editor.putString (KEY_EMAIL, user.getEmail());
+        editor.putString (KEY_EMAIL, user.getUserName());
         editor.putString(KEY_PASSWORD, user.getPassword());
         editor.apply();
     }
     //this method will checker whether user is already logged in or not
     public boolean isLoggedIn() {
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences (SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        return sharedPreferences.getString (KEY_USERNAME,null) != null;
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(ctx);
+        String token =  sharedPreferences.getString(KEY_TOKEN, null);
+        if(token != null){
+            JWT jwt = new JWT(token);
+            return Objects.requireNonNull(jwt.getExpiresAt()).after(Calendar.getInstance().getTime());
+        }
+        return false;
     }
     //this method will give the logged in user
     public User getUser() {

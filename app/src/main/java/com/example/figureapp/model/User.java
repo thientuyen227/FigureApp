@@ -2,11 +2,11 @@ package com.example.figureapp.model;
 
 public class User extends AbstractModel<User> {
     private String name;
-    private String email;
+    private String userName;
 
-    public User(String name, String email, String password) {
+    public User(String name, String userName, String password) {
         this.name = name;
-        this.email = email;
+        this.userName = userName;
         this.password = password;
     }
 
@@ -21,12 +21,12 @@ public class User extends AbstractModel<User> {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
