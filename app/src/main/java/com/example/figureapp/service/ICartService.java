@@ -8,8 +8,10 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Query;
 
 public interface ICartService {
-    @GET("/cart")
-    Call<ArrayList<ProductModel>> getAllProductInCart(@Field("iduser")int id);
+    @GET("/cart/itemcarts")
+    Call<ArrayList<ProductModel>> getAllProductInCart(@Header("Authorization") String token);
 }

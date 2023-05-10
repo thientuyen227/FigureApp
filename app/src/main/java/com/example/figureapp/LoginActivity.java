@@ -38,7 +38,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         if(SharedPrefManager.getInstance(this).isLoggedIn()){
-
             finish();
             startActivity(new Intent(LoginActivity.this,HomeActivity.class));
         }
@@ -73,6 +72,9 @@ public class LoginActivity extends AppCompatActivity {
                             Response jsonResponse = response.body(); // lấy chuỗi JSON trả về từ API4
                             String token = jsonResponse.getToken();
                             SharedPrefManager.getInstance(getApplicationContext()).saveToken(token);
+                            User user = jsonResponse.getUser();
+                            System.out.println("kkkkkkkkkkkkkkkkkkkk "+user.getName());
+                            SharedPrefManager.getInstance(LoginActivity.this).userLogin(user);
                             finish();
                             Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
                             startActivity(intent);

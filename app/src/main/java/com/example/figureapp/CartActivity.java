@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.figureapp.adapter.ProductAdapter;
@@ -23,6 +27,8 @@ import retrofit2.Response;
 public class CartActivity extends BaseActivity {
     private ProductAdapter productAdapter;
     private RecyclerView productRecyclerView;
+    private static final String SHARED_PREF_NAME = "volleyregisterlogin";
+    private static final String KEY_TOKEN = "keytoken";
     ArrayList<ProductModel> products;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +38,12 @@ public class CartActivity extends BaseActivity {
         setBottomAppBar();
         initComponents();
         initData();
-        Intent intent = getIntent();
-        int iduser = intent.getIntExtra("iduser", 0);
-        loadCart(iduser);
+        loadCart();
     }
-    private void loadCart(int id){
-        BaseAPIService.createService(ICartService.class).getAllProductInCart(id).enqueue(new Callback<ArrayList<ProductModel>>() {
+    private void loadCart(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        String token =  sharedPreferences.getString(KEY_TOKEN, null);
+        BaseAPIService.createService(ICartService.class).getAllProductInCart("Bearer " + token).enqueue(new Callback<ArrayList<ProductModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
                 products= response.body();
@@ -46,7 +52,6 @@ public class CartActivity extends BaseActivity {
                 productRecyclerView.setLayoutManager(linearLayoutManager);
                 productRecyclerView.setAdapter(productAdapter);
             }
-
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
                 Toast.makeText(CartActivity.this, "Call Api Success", Toast.LENGTH_LONG).show();
@@ -54,7 +59,7 @@ public class CartActivity extends BaseActivity {
         });
     }
     private void initComponents() {
-        productRecyclerView = findViewById(R.id.product_recyclerview);
+        productRecyclerView = findViewById(R.id.rv_item_cart);
     }
     private void initData() {
         products = new ArrayList<>();
