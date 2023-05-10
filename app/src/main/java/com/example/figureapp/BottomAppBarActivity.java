@@ -14,7 +14,7 @@ import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class BottomAppBarActivity extends AppCompatActivity {
-    FloatingActionButton btnHome, btnCart;
+    FloatingActionButton btnHome, btnCart,btnSetting;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +33,13 @@ public class BottomAppBarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(BottomAppBarActivity.this, CartActivity.class));
+            }
+        });
+        btnSetting = findViewById(R.id.btn_settings);
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BottomAppBarActivity.this, SettingActivity.class));
             }
         });
     }
