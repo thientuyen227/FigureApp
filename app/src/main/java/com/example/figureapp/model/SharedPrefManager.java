@@ -18,6 +18,7 @@ public class SharedPrefManager {
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
 
     private static final String KEY_USERNAME = "keyusername";
+    private static final String KEY_USER = "keyuser";
     private static final String KEY_TOKEN = "keytoken";
     private static final String KEY_EMAIL = "keyemail";
     private static final String KEY_PASSWORD = "keypassword";
@@ -60,20 +61,19 @@ public class SharedPrefManager {
     }
     //this method will give the logged in user
     public User getUser() {
-        SharedPreferences sharedPreferences = ctx.getSharedPreferences (SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
                 sharedPreferences.getString (KEY_NAME,  null),
                 sharedPreferences.getString (KEY_EMAIL,  null),
                 sharedPreferences.getString(KEY_IDCARD,null),
                 sharedPreferences.getString(KEY_AVATAR,null),
                 sharedPreferences.getInt (KEY_EWALLET,  0)
-
                 );
     }
     //this method will logout the user
     public void logout() {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences (SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences. Editor editor = sharedPreferences.edit();
+        SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
         ctx.startActivity(new Intent(ctx, LoginActivity.class));}

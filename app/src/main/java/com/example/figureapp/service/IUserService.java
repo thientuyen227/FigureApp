@@ -20,9 +20,11 @@ public interface IUserService {
     @POST("/users/signup")
     Call<Response> signUp(@Field("email") String email, @Field("username") String username, @Field("password") String password);
 
+    @GET("/users/getProfile")
+    Call<User> getProfile(@Header("Authorization") String token);
     @FormUrlEncoded
-    @PUT("/users/profile")
-    Call<ArrayList<User>> profile(
+    @PUT("/users/updateProfile")
+    Call<ArrayList<User>> updateProfile(
             @Field("name") String name,
             @Field("email") String email,
             @Field("avatar") String avatar,

@@ -3,24 +3,31 @@ var jwt = require('jsonwebtoken');
 
 var router = express.Router();
 
-const { authenticateToken } = require('./helper.js')
+const { authenticateToken, parseUserId } = require('./helper.js')
 //Connection MySQL
 const connection = require('./connectionMySQL');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
-
-router.put('/profile', authenticateToken, function (req, res, next) {
-  const idUser = req.user.userid;
-
-  const name = req.body.name;
-  const email = req.body.email;
-  const avatar = req.body.avatar;
-  const idCard = req.body.idCard;
-  const eWallet = req.body.eWallet;
+//get profile
+router.get('/getProfile', authenticateToken, function (req, res, next) {
+  const userId = parseUserId(req);
+  const sql = 'select * from user where id = ? limit 1';
+  connection.query(sql, [userId], (err, result) => {
+    if (err) throw err;
+    res.json(result[0]);
+  });
+})
+router.put('/updateProfile', authenticateToken, function (req, res, next) {
+  const userId = parseUserId(req);
+  const name = data.name;
+  const email = data.email;
+  const avatar = data.avatar;
+  const idCard = data.idCard;
+  const eWallet = data.eWallet;
   const sql = 'Update user where id = ? set name = ?, email=?, avatar = ? , idCard=?, eWallet =?'
-  connection.query(sql, [idUser, name, email, avatar, idCard, eWallet], (err, result) => {
+  connection.query(sql, [userId, name, email, avatar, idCard, eWallet], (err, result) => {
     if (err) throw err;
     res.json(result);
   });
@@ -40,8 +47,8 @@ router.post('/login', function (req, res, next) {
 
     if (results.length > 0) {
       // Nếu đúng, trả về mã thông  báo (token) đểsử dụng cho các yêu cầu khác
-      const token = jwt.sign({ userid: user.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3d' });
-      res.json({ success: true, token: token, user: others });
+      const token = jwt.sign({ userId: user.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3d' });
+      res.json({ success: true, token: token});
     } else {
       // Nếu sai, trả về thông báo lỗi
       res.status(401).json({ success: false, token: 'Invalid username or password' });

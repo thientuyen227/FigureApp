@@ -11,10 +11,12 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.figureapp.R;
+import com.example.figureapp.model.FollowingProductModel;
 import com.example.figureapp.model.ProductModel;
 import com.example.figureapp.model.User;
 import com.example.figureapp.service.BaseAPIService;
 import com.example.figureapp.service.ICartService;
+import com.example.figureapp.service.IFollowingProductService;
 import com.example.figureapp.service.IUserService;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,7 +28,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BottomAppBarActivity extends AppCompatActivity {
-    FloatingActionButton btnHome, btnCart;
+    FloatingActionButton btnHome, btnCart, btnFollow;
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
     User user;
     @Override
@@ -54,6 +56,26 @@ public class BottomAppBarActivity extends AppCompatActivity {
                         Intent intent = new Intent(BottomAppBarActivity.this, CartActivity.class);
                         startActivity(intent);
                     }
+                    @Override
+                    public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+        btnFollow = findViewById(R.id.btn_follow);
+        btnFollow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+                String token = sharedPreferences.getString("token", ""); // Lấy token đã lưu trong SharedPreferences
+                BaseAPIService.createService(IFollowingProductService.class).getAllFollowingProducts("Bearer " + token).enqueue(new Callback<ArrayList<ProductModel>>() {
+                    @Override
+                    public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
+                        Intent intent = new Intent(BottomAppBarActivity.this, FollowingProductActivity.class);
+                        startActivity(intent);
+                    }
+
                     @Override
                     public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
 
