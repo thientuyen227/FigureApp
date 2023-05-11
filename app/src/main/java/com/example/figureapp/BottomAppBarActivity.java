@@ -28,13 +28,9 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BottomAppBarActivity extends AppCompatActivity {
-<<<<<<< HEAD
-    FloatingActionButton btnHome, btnCart,btnSetting;
-=======
-    FloatingActionButton btnHome, btnCart, btnFollow;
+    FloatingActionButton btnHome, btnCart,btnSetting, btnFollow;
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
     User user;
->>>>>>> develop
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

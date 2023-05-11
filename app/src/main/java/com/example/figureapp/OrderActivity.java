@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -22,6 +23,9 @@ import retrofit2.Response;
 public class OrderActivity extends BaseActivity {
     private ProductAdapter productAdapter;
     private RecyclerView productRecyclerView;
+
+    private static final String SHARED_PREF_NAME = "volleyregisterlogin";
+    private static final String KEY_TOKEN = "keytoken";
     ArrayList<ProductModel> products;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +35,19 @@ public class OrderActivity extends BaseActivity {
         setBottomAppBar();
         initComponents();
         initData();
-        Intent intent = getIntent();
-        int iduser = intent.getIntExtra("iduser", 0);
-        loadOrder(iduser);
+        loadOrder();
     }
-    private void loadOrder(int id){
-        BaseAPIService.createService(ICartService.class).getAllProductInCart(id).enqueue(new Callback<ArrayList<ProductModel>>() {
+    private void loadOrder(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
+        String token =  sharedPreferences.getString(KEY_TOKEN, null);
+        BaseAPIService.createService(ICartService.class).getAllProductInCart("Bearer " + token).enqueue(new Callback<ArrayList<ProductModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
                 products= response.body();
                 productAdapter = new ProductAdapter(products, OrderActivity.this);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(OrderActivity.this, LinearLayoutManager.VERTICAL,false);
                 productRecyclerView.setLayoutManager(linearLayoutManager);
+                productRecyclerView.setAdapter(productAdapter);
                 productRecyclerView.setAdapter(productAdapter);
             }
 
