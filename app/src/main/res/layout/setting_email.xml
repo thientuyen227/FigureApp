@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Setting_email">
+
+    <ImageView
+        android:id="@+id/im_avatar"
+        android:layout_width="113dp"
+        android:layout_height="112dp"
+
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintEnd_toStartOf="@+id/tv_Name"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <TextView
+        android:id="@+id/tv_Name"
+        android:layout_width="200dp"
+        android:layout_height="41dp"
+        android:layout_gravity="center"
+        android:text="NAME"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="141dp"
+        tools:layout_editor_absoluteY="52dp"
+        tools:ignore="MissingConstraints"></TextView>
+
+    <LinearLayout
+        android:layout_width="396dp"
+        android:layout_height="49dp"
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="183dp"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:layout_width="182dp"
+            android:layout_height="43dp"
+            android:text="Enter Your Email"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold"></TextView>
+
+        <EditText
+            android:id="@+id/edt_newEmail"
+            android:layout_width="208dp"
+            android:layout_height="match_parent"
+            android:text="Nhập email mới"
+            android:textSize="20sp"></EditText>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="340dp"
+        android:text="Re-Enter old password"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="95dp"></TextView>
+
+    <EditText
+        android:id="@+id/edt_RePassWord"
+        android:layout_width="319dp"
+        android:layout_height="67dp"
+        android:layout_marginTop="16dp"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.617"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        android:text="Nhập lại mật khẩu"
+        tools:ignore="MissingConstraints"></EditText>
+
+    <Button
+        android:id="@+id/btn_return"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="44dp"
+        android:text="RETURN"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edt_OldPassWord"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btn_Accept"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="ACCEPT"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toEndOf="@+id/btn_return"
+        app:layout_constraintTop_toBottomOf="@+id/edt_OldPassWord"
+        app:layout_constraintVertical_bias="0.502"
+        tools:ignore="MissingConstraints" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

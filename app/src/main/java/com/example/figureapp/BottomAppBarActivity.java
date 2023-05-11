@@ -28,9 +28,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BottomAppBarActivity extends AppCompatActivity {
+<<<<<<< HEAD
+    FloatingActionButton btnHome, btnCart,btnSetting;
+=======
     FloatingActionButton btnHome, btnCart, btnFollow;
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
     User user;
+>>>>>>> develop
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +85,13 @@ public class BottomAppBarActivity extends AppCompatActivity {
 
                     }
                 });
+            }
+        });
+        btnSetting = findViewById(R.id.btn_settings);
+        btnSetting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BottomAppBarActivity.this, SettingActivity.class));
             }
         });
     }
