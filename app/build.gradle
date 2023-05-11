@@ -6,6 +6,7 @@ android {
     namespace 'com.example.figureapp'
     compileSdk 33
 
+
     defaultConfig {
         applicationId "com.example.figureapp"
         minSdk 24
