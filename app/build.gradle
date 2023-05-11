@@ -6,6 +6,7 @@ android {
     namespace 'com.example.figureapp'
     compileSdk 33
 
+
     defaultConfig {
         applicationId "com.example.figureapp"
         minSdk 24
@@ -64,5 +65,6 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:31.5.0')
     implementation 'com.google.firebase:firebase-analytics'
     implementation("io.coil-kt:coil:2.3.0")
+    implementation 'com.auth0.android:jwtdecode:2.0.2'
 
 }

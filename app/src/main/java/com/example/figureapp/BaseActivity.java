@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class BaseActivity extends BottomAppBarActivity {
 
-    ImageView btnProfile, btnCart;
+    ImageView btnProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
