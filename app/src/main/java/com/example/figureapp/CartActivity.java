@@ -15,6 +15,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.figureapp.adapter.ProductAdapter;
+import com.example.figureapp.entities.Products;
 import com.example.figureapp.model.CartModel;
 import com.example.figureapp.model.ProductModel;
 import com.example.figureapp.service.BaseAPIService;
@@ -26,9 +27,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class CartActivity extends BaseActivity {
+public class CartActivity extends BaseActivity implements ProductAdapter.iClickListener {
     private ProductAdapter productAdapter;
     private RecyclerView productRecyclerView;
+
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
     private static final String KEY_TOKEN = "keytoken";
     ArrayList<ProductModel> products;
@@ -49,14 +51,14 @@ public class CartActivity extends BaseActivity {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
                 products= response.body();
-                productAdapter = new ProductAdapter(products, CartActivity.this);
+                productAdapter = new ProductAdapter(products, CartActivity.this, CartActivity.this );
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL,false);
                 productRecyclerView.setLayoutManager(linearLayoutManager);
                 productRecyclerView.setAdapter(productAdapter);
             }
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                Toast.makeText(CartActivity.this, "Call Api Success", Toast.LENGTH_LONG).show();
+                Toast.makeText(CartActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -66,5 +68,10 @@ public class CartActivity extends BaseActivity {
     }
     private void initData() {
         products = new ArrayList<>();
+    }
+
+    @Override
+    public void addProduct(Products product) {
+
     }
 }

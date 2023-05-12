@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.example.figureapp.adapter.ProductAdapter;
+import com.example.figureapp.entities.Products;
 import com.example.figureapp.model.ProductModel;
 import com.example.figureapp.service.BaseAPIService;
 import com.example.figureapp.service.ICartService;
@@ -20,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class OrderActivity extends BaseActivity {
+public class OrderActivity extends BaseActivity implements ProductAdapter.iClickListener {
     private ProductAdapter productAdapter;
     private RecyclerView productRecyclerView;
 
@@ -44,16 +45,15 @@ public class OrderActivity extends BaseActivity {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
                 products= response.body();
-                productAdapter = new ProductAdapter(products, OrderActivity.this);
+                productAdapter = new ProductAdapter(products, OrderActivity.this, OrderActivity.this);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(OrderActivity.this, LinearLayoutManager.VERTICAL,false);
                 productRecyclerView.setLayoutManager(linearLayoutManager);
-                productRecyclerView.setAdapter(productAdapter);
                 productRecyclerView.setAdapter(productAdapter);
             }
 
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                Toast.makeText(OrderActivity.this, "Call Api Success", Toast.LENGTH_LONG).show();
+                Toast.makeText(OrderActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -62,5 +62,10 @@ public class OrderActivity extends BaseActivity {
     }
     private void initData() {
         products = new ArrayList<>();
+    }
+
+    @Override
+    public void addProduct(Products product) {
+
     }
 }

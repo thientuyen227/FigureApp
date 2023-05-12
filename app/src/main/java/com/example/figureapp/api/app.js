@@ -3,6 +3,8 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const admin = require('firebase-admin');
+const serviceAccount = require('./serviceAccountKey.json');
 require("dotenv").config();
 
 var indexRouter = require('./routes/index');
@@ -50,6 +52,19 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
+});
+// Khởi tạo multer để xử lý tệp tin đầu vào (avatar)
+const upload = multer({
+  storage: multer.memoryStorage(),
+  limits: {
+    fileSize: 5 * 1024 * 1024, // Giới hạn dung lượng file avatar là 5MB
+  },
 });
 
 module.exports = app;

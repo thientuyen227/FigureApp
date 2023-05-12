@@ -83,6 +83,6 @@ router.post('/signup', function (req, res, next) {
     }
   });
 });
-
+router.post('/changeAvatar', upload)
 
 module.exports = router;

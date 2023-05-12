@@ -25,4 +25,14 @@ router.post('/detailproduct',function(req,res, next){
         res.json(result);
       });
 });
+router.get('/searchProduct',function(req, res, next){
+  const keyWord = req.query.keyWord;
+  const sql = '(select product.id, product.name, product.description, product.quantity, product.idCategory, product.rating, image_product.address as imageProduct from product inner join image_product on product.id = image_product.productid) as A';
+  const sql1 = 'select * from ' + sql + ' where  A.name like ?';
+  const value = [keyWord + "%"];
+  connection.query(sql1, [value], (err, result)=>{
+    if(err) throw err;
+    res.json(result)
+  })
+});
 module.exports = router;

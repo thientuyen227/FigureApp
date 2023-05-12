@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.figureapp.R;
 import com.example.figureapp.model.FollowingProductModel;
@@ -30,7 +31,8 @@ import retrofit2.Response;
 public class BottomAppBarActivity extends AppCompatActivity {
     FloatingActionButton btnHome, btnCart,btnSetting, btnFollow;
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
-    User user;
+
+    private static final String KEY_TOKEN = "keytoken";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +51,7 @@ public class BottomAppBarActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-                String token = sharedPreferences.getString("token", ""); // Lấy token đã lưu trong SharedPreferences
+                String token = sharedPreferences.getString(KEY_TOKEN, ""); // Lấy token đã lưu trong SharedPreferences
                 BaseAPIService.createService(ICartService.class).getAllProductInCart("Bearer " + token).enqueue(new Callback<ArrayList<ProductModel>>() {
                     @Override
                     public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
@@ -58,7 +60,7 @@ public class BottomAppBarActivity extends AppCompatActivity {
                     }
                     @Override
                     public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-
+                        Toast.makeText(BottomAppBarActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -78,7 +80,7 @@ public class BottomAppBarActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-
+                        Toast.makeText(BottomAppBarActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.figureapp.model.SharedPrefManager;
 import com.example.figureapp.model.User;
 import com.example.figureapp.service.BaseAPIService;
@@ -46,7 +47,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 }
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(ProfileActivity.this, "Call Api Success", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ProfileActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
                 }
             });
         }
@@ -58,6 +59,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
         }
     }
     private void updateProfile(User user){
+        Glide.with(getApplicationContext()).load(user.getAvatar()).into(im_profile);
         tv_name.setText(user.getName());
         tv_email.setText(user.getEmail());
         tv_IdCard.setText(user.getIdCard());

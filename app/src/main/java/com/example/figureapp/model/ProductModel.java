@@ -1,10 +1,10 @@
 package com.example.figureapp.model;
 
+
 public class ProductModel extends AbstractModel<ProductModel> {
     private String name, description, imageProduct;
     private int idProduct;
     private int idCategory;
-
 
     public String getName() {
         return name;
