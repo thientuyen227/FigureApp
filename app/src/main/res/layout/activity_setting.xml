@@ -7,75 +7,115 @@
     android:orientation="vertical"
     tools:context=".SettingActivity">
 
-    <ImageView
-        android:id="@+id/im_avatar"
-        android:layout_width="113dp"
-        android:layout_height="112dp"
-
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="12dp"
-        android:src="@drawable/ic_profile"
-        app:layout_constraintEnd_toStartOf="@+id/tv_Name"
-        app:layout_constraintTop_toTopOf="parent"></ImageView>
-
-    <TextView
-        android:id="@+id/tv_Name"
-        android:layout_width="200dp"
-        android:layout_height="41dp"
-        android:layout_gravity="center"
-        android:text="NAME"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="52dp"
-        tools:ignore="MissingConstraints"></TextView>
-
-    <Button
-        android:id="@+id/btn_changePassWord"
-        android:layout_width="200dp"
-        android:layout_height="41dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="156dp"
-        android:text="Change Pasword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btn_changeEmail"
-        android:layout_width="200dp"
-        android:layout_height="41dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Change Email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_changePassWord"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btn_chaneIdCard"
-        android:layout_width="200dp"
-        android:layout_height="41dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="16dp"
-        android:text="Chane ID Card"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_changeEmail"
-        tools:ignore="MissingConstraints" />
-
-    <Button
-        android:id="@+id/btn_return"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
-        android:text="RETURN"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_chaneIdCard"
-        app:layout_constraintVertical_bias="0.0"
+    <LinearLayout
+        android:layout_width="360dp"
+        android:layout_height="134dp"
+        android:orientation="horizontal"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="159dp" />
+        tools:layout_editor_absoluteX="25dp"
+        tools:layout_editor_absoluteY="25dp">
 
+        <ImageView
+            android:id="@+id/im_avatar"
+            android:layout_width="113dp"
+            android:layout_height="112dp"
+
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_profile"
+            app:layout_constraintEnd_toStartOf="@+id/tv_Name"
+            app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+        <TextView
+            android:id="@+id/tv_Name"
+            android:layout_width="230dp"
+            android:layout_height="44dp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="NAME"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:background="@drawable/textview_border"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="141dp"
+            tools:layout_editor_absoluteY="52dp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="105dp"
+        tools:layout_editor_absoluteY="177dp">
+
+        <Button
+            android:id="@+id/btn_changePassWord"
+            android:layout_width="200dp"
+            android:layout_height="41dp"
+            android:layout_gravity="center"
+            android:text="Change Pasword"
+            android:background="@drawable/button_shadow"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="105dp"
+            tools:layout_editor_absoluteY="176dp" />
+
+        <Button
+            android:id="@+id/btn_changeProfile"
+            android:layout_width="200dp"
+            android:layout_height="41dp"
+            android:layout_gravity="center"
+            android:text="Change Profile"
+            android:background="@drawable/button_shadow"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="106dp"
+            tools:layout_editor_absoluteY="237dp" />
+
+        <Button
+            android:id="@+id/btn_chaneIdCard"
+            android:layout_width="200dp"
+            android:layout_height="41dp"
+            android:layout_gravity="center"
+            android:text="Chane ID Card"
+            android:background="@drawable/button_shadow"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="106dp"
+            tools:layout_editor_absoluteY="294dp" />
+        <Button
+            android:id="@+id/btn_order"
+            android:layout_width="200dp"
+            android:layout_height="41dp"
+            android:layout_gravity="center"
+            android:text="Order"
+            android:background="@drawable/button_shadow"
+            android:textColor="#FFFFFF"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="106dp"
+            tools:layout_editor_absoluteY="294dp"/>
+        <Button
+            android:id="@+id/btn_return"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="RETURN"
+            android:background="@drawable/button_shadow"
+            android:textColor="#FFFFFF"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="159dp"
+            tools:layout_editor_absoluteY="467dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
