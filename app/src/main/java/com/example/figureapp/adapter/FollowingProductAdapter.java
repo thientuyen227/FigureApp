@@ -48,7 +48,6 @@ public class FollowingProductAdapter extends RecyclerView.Adapter<FollowingProdu
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Products followingProduct = followingProducts.get(position);
         Glide.with(context).load(followingProduct.getImage()).into(holder.productImage);
-        holder.productTitle.setText(followingProduct.getName());
         holder.setItemClickListener(new SelectListener() {
             @Override
             public void onItemClicked(View view, int position, boolean isLongClick) {

@@ -55,16 +55,16 @@ app.use(function(err, req, res, next) {
 });
 
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
-});
-// Khởi tạo multer để xử lý tệp tin đầu vào (avatar)
-const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: 5 * 1024 * 1024, // Giới hạn dung lượng file avatar là 5MB
-  },
-});
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: 'https://<DATABASE_NAME>.firebaseio.com'
+// });
+// // Khởi tạo multer để xử lý tệp tin đầu vào (avatar)
+// const upload = multer({
+//   storage: multer.memoryStorage(),
+//   limits: {
+//     fileSize: 5 * 1024 * 1024, // Giới hạn dung lượng file avatar là 5MB
+//   },
+// });
 
 module.exports = app;

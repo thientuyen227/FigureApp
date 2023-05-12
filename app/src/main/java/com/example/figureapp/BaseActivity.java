@@ -59,6 +59,7 @@ public class BaseActivity extends BottomAppBarActivity {
         layoutParams.rightMargin = 20;
         customView.addView(btnProfile);
         actionBar.setCustomView(customView, layoutParams);
+
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         String token = sharedPreferences.getString(KEY_TOKEN, "");
         BaseAPIService.createService(IUserService.class).getProfile("Bearer "+ token).enqueue(new Callback<User>() {
