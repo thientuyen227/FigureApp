@@ -23,7 +23,7 @@
             android:name=".Setting_idcard"
             android:exported="false" />
         <activity
-            android:name=".Setting_email"
+            android:name=".Setting_profile"
             android:exported="false" />
         <activity
             android:name=".Setting_password"

@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Setting_email extends AppCompatActivity {
+public class Setting_profile extends AppCompatActivity {
 
     TextView tvName;
     ImageView imUser;
@@ -45,13 +45,13 @@ public class Setting_email extends AppCompatActivity {
         alert.setPositiveButton("Có", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {//lệnh nút có
-                startActivity(new Intent(Setting_email.this, SettingActivity.class));
+                startActivity(new Intent(Setting_profile.this, SettingActivity.class));
             }
         });
         alert.setNegativeButton("Không", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {//lệnh nút không
-                startActivity(new Intent(Setting_email.this, SettingActivity.class));
+                startActivity(new Intent(Setting_profile.this, SettingActivity.class));
             }
         });
         alert.show();
@@ -63,12 +63,12 @@ public class Setting_email extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.setting_email);
+        setContentView(R.layout.setting_profile);
         AnhXA();
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Setting_email.this, SettingActivity.class));
+                startActivity(new Intent(Setting_profile.this, SettingActivity.class));
             }
         });
         btnAccept.setOnClickListener(new View.OnClickListener() {
