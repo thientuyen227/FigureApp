@@ -38,7 +38,7 @@ public class SettingActivity extends AppCompatActivity {
         btnChangeEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SettingActivity.this, Setting_email.class));
+                startActivity(new Intent(SettingActivity.this, Setting_profile.class));
             }
         });
 
