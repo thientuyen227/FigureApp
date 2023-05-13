@@ -3,7 +3,25 @@ package com.example.figureapp.model;
 
 public class ProductModel extends AbstractModel<ProductModel> {
     private String name, description, imageProduct;
-    private int idProduct;
+    private double price;
+    private int idProduct, quantity;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
     private int idCategory;
 
     public String getName() {

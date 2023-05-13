@@ -50,19 +50,8 @@ public class BottomAppBarActivity extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-                String token = sharedPreferences.getString(KEY_TOKEN, ""); // Lấy token đã lưu trong SharedPreferences
-                BaseAPIService.createService(ICartService.class).getAllProductInCart("Bearer " + token).enqueue(new Callback<ArrayList<ProductModel>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
-                        Intent intent = new Intent(BottomAppBarActivity.this, CartActivity.class);
-                        startActivity(intent);
-                    }
-                    @Override
-                    public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                        Toast.makeText(BottomAppBarActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                Intent intent = new Intent(BottomAppBarActivity.this, CartActivity.class);
+                startActivity(intent);
             }
         });
         btnFollow = findViewById(R.id.btn_follow);

@@ -66,47 +66,6 @@ router.put('/changeAvatar', upload.single("avatar") ,authenticateToken, async fu
 });
 
 
-
-// router.put('/updateProfile', authenticateToken, async function (req, res, next) {
-//   const userId = parseUserId(req);
-//   const name = req.body.name;
-//   const email = req.body.email;
-//   const avatar = req.body.avatar;
-//   const idCard = req.body.idCard;
-//   const eWallet = req.body.eWallet;
-//   // Get Avatar file from request body
-//   const avatarFile = req.body.avatar;
-
-//   // Generate random filename for Avatar
-//   const avatarFilename = `avatar-${uuid.v4()}.jpg`;
-
-//   try {
-//     // Upload Avatar to Firebase Storage
-//     const bucket = admin.storage().bucket();
-//     await bucket.upload(avatarFile., {
-//       destination: avatarFilename,
-//       contentType: 'image/jpeg'
-//     });
-
-//     // Get signed URL for Avatar file
-//     const avatarUrl = await bucket.file(avatarFilename).getSignedUrl({
-//       action: 'read',
-//       expires: '03-09-2491'
-//     }).then(urls => urls[0]);
-
-//     // Update user profile in MySQL database
-//     const sql = 'UPDATE user SET name = ?, email = ?, avatar = ?, idCard = ?, eWallet = ? WHERE id = ?';
-//     const params = [name, email, avatarUrl, idCard, eWallet, userId];
-//     connection.query(sql, params, (err, result) => {
-//       if (err) throw err;
-//       res.json(result);
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).send(error);
-//   }
-// });
-
 // Login
 router.post('/login', function (req, res, next) {
   const { username, password } = req.body;

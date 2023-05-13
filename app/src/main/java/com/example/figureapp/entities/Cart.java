@@ -1,18 +1,29 @@
 package com.example.figureapp.entities;
 
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
-@Entity(tableName = "product")
-public class Products implements Serializable {
+@Entity(tableName = "cart")
+public class Cart implements Serializable {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String name;
     private String image;
     private double price;
     private String description;
+
+    public int getIdProduct() {
+        return idProduct;
+    }
+
+    public void setIdProduct(int idProduct) {
+        this.idProduct = idProduct;
+    }
+
+    private int idProduct;
     private int quantity;
 
     public int getQuantity() {
@@ -29,6 +40,16 @@ public class Products implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Cart(int id, String name, String image, double price, String description,int quantity,int idProduct) {
+        this.id = id;
+        this.name = name;
+        this.image = image;
+        this.price = price;
+        this.description = description;
+        this.quantity = quantity;
+        this.idProduct = idProduct;
     }
 
     public int getId() {
@@ -61,14 +82,5 @@ public class Products implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
-    }
-
-    public Products(int id, String name, String image, double price, String description, int quantity) {
-        this.id = id;
-        this.name = name;
-        this.image = image;
-        this.price = price;
-        this.description = description;
-        this.quantity = quantity;
     }
 }

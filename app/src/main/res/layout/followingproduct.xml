@@ -68,6 +68,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:background="@drawable/follow_button"
+                        android:tint="@color/colorPrimary"
                         android:contentDescription=""
                         android:src="@drawable/ic_follow"
                         android:onClick="onFollowButtonClicked"

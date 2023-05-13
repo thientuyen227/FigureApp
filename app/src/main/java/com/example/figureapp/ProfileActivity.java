@@ -210,7 +210,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 // Nếu thành công, cập nhật lại thông tin user và hiển thị ảnh mới
                 if(response.isSuccessful()) {
                     updateProfile(response.body());
-                    System.out.println(response.body());
                     Glide.with(getApplicationContext()).load(response.body().getAvatar()).into(im_profile);
                     Toast.makeText(ProfileActivity.this, "Đổi avatar thành công.", Toast.LENGTH_SHORT).show();
                 }

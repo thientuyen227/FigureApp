@@ -9,11 +9,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import com.example.figureapp.adapter.OrderAdapter;
 import com.example.figureapp.adapter.ProductAdapter;
 import com.example.figureapp.entities.Products;
+import com.example.figureapp.model.OrderModel;
 import com.example.figureapp.model.ProductModel;
 import com.example.figureapp.service.BaseAPIService;
 import com.example.figureapp.service.ICartService;
+import com.example.figureapp.service.IOrderService;
 
 import java.util.ArrayList;
 
@@ -22,12 +25,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class OrderActivity extends BaseActivity implements ProductAdapter.iClickListener {
-    private ProductAdapter productAdapter;
+    private OrderAdapter orderAdapter;
     private RecyclerView productRecyclerView;
 
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
     private static final String KEY_TOKEN = "keytoken";
-    ArrayList<ProductModel> products;
+    ArrayList<OrderModel> orderModels;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +44,18 @@ public class OrderActivity extends BaseActivity implements ProductAdapter.iClick
     private void loadOrder(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         String token =  sharedPreferences.getString(KEY_TOKEN, null);
-        BaseAPIService.createService(ICartService.class).getAllProductInCart("Bearer " + token).enqueue(new Callback<ArrayList<ProductModel>>() {
+        BaseAPIService.createService(IOrderService.class).getAllOrderItem("Bearer " + token).enqueue(new Callback<ArrayList<OrderModel>>() {
             @Override
-            public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
-                products= response.body();
-                productAdapter = new ProductAdapter(products, OrderActivity.this, OrderActivity.this);
+            public void onResponse(Call<ArrayList<OrderModel>> call, Response<ArrayList<OrderModel>> response) {
+                orderModels= response.body();
+                orderAdapter = new OrderAdapter(orderModels, OrderActivity.this);
                 LinearLayoutManager linearLayoutManager = new LinearLayoutManager(OrderActivity.this, LinearLayoutManager.VERTICAL,false);
                 productRecyclerView.setLayoutManager(linearLayoutManager);
-                productRecyclerView.setAdapter(productAdapter);
+                productRecyclerView.setAdapter(orderAdapter);
             }
 
             @Override
-            public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
+            public void onFailure(Call<ArrayList<OrderModel>> call, Throwable t) {
                 Toast.makeText(OrderActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
             }
         });
@@ -61,7 +64,7 @@ public class OrderActivity extends BaseActivity implements ProductAdapter.iClick
         productRecyclerView = findViewById(R.id.product_recyclerview);
     }
     private void initData() {
-        products = new ArrayList<>();
+        orderModels = new ArrayList<>();
     }
 
     @Override

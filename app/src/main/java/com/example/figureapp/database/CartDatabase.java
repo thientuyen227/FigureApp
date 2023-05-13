@@ -8,20 +8,22 @@ import androidx.room.RoomDatabase;
 
 import com.example.figureapp.dao.CartDao;
 import com.example.figureapp.dao.FollowingProductDao;
+import com.example.figureapp.entities.Cart;
 import com.example.figureapp.entities.Products;
 
-@Database(entities = {Products.class}, version = 1)
-public abstract class ProductDatabase extends RoomDatabase {
-    private static final String DATABASE_NAME= "product.db";
-    private static ProductDatabase instance;
-    public static synchronized ProductDatabase getInstance(Context context){
-        if (instance == null){
+@Database(entities = {Cart.class}, version = 1, exportSchema = true)
+public abstract class CartDatabase extends RoomDatabase {
+    private static final String DATABASE_NAME = "cart.db";
+    private static CartDatabase instance;
+
+    public static synchronized CartDatabase getInstance(Context context) {
+        if (instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(),
-                    ProductDatabase.class,DATABASE_NAME)
+                            CartDatabase.class, DATABASE_NAME)
                     .allowMainThreadQueries()
                     .build();
         }
         return instance;
     }
-    public abstract FollowingProductDao followingProductDao();
+        public abstract CartDao cartDao();
 }

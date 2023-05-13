@@ -32,10 +32,7 @@ import retrofit2.Response;
 
 public class FollowingProductActivity extends BaseActivity implements ProductAdapter.iClickListener {
     private RecyclerView rc_following_product;
-    private List<Products> listProduct;
     private FollowingProductAdapter followingProductAdapter;
-    private static final String SHARED_PREF_NAME = "volleyregisterlogin";
-    private static final String KEY_TOKEN = "keytoken";
     private ArrayList<FollowingProductModel> followingProduct;
     private List<Products> productModels;
     @Override
