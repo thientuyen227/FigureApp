@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Setting_profile">
 
     <LinearLayout
-        android:layout_width="360dp"
+        android:layout_width="match_parent"
         android:layout_height="134dp"
         android:orientation="horizontal"
         tools:ignore="MissingConstraints"
@@ -26,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent"></ImageView>
 
         <TextView
-            android:id="@+id/tv_Name"
+            android:id="@+id/tv_name"
             android:layout_width="230dp"
             android:layout_height="44dp"
             android:layout_gravity="center"
@@ -67,11 +68,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="420dp"
+        android:layout_height="446dp"
         android:orientation="vertical"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="15dp"
         tools:layout_editor_absoluteY="220dp">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="49dp"
@@ -151,7 +153,7 @@
                 android:textStyle="bold"></TextView>
 
             <EditText
-                android:id="@+id/edt_newEmail"
+                android:id="@+id/edt_email"
                 android:layout_width="208dp"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
@@ -203,8 +205,8 @@
                 android:layout_height="45dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:gravity="center"
                 android:background="@drawable/textview_border"
+                android:gravity="center"
                 android:text="Re-Enter old password"
                 android:textColor="@color/black"
                 android:textSize="20sp"
@@ -214,12 +216,12 @@
                 tools:layout_editor_absoluteY="260dp"></TextView>
 
             <EditText
-                android:id="@+id/edt_OldPassWord"
+                android:id="@+id/edt_oldPassWord"
                 android:layout_width="269dp"
                 android:layout_height="57dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/textview_border"
-                android:layout_gravity="center"
                 android:gravity="center"
                 android:hint="Enter Password"
                 android:inputType="textPassword"
@@ -231,41 +233,32 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:orientation="horizontal"
             android:gravity="center_horizontal"
+            android:orientation="horizontal"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="6dp"
             tools:layout_editor_absoluteY="570dp">
-            <Button
-                android:id="@+id/btn_return"
-                android:layout_width="150dp"
-                android:layout_height="60dp"
-                android:text="RETURN"
-                android:background="@drawable/button_shadow"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="44dp"
-                tools:layout_editor_absoluteY="573dp" />
 
             <Button
                 android:id="@+id/btn_accept"
                 android:layout_width="150dp"
                 android:layout_height="60dp"
-                android:text="ACCEPT"
-                android:background="@drawable/button_shadow"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
                 android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_marginEnd="10dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/button_shadow"
+                android:text="ACCEPT"
+                android:textColor="#FFFFFF"
                 tools:ignore="MissingConstraints"
                 tools:layout_editor_absoluteX="227dp"
                 tools:layout_editor_absoluteY="573dp" />
         </LinearLayout>
     </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        layout="@layout/activity_bottom_app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="0dp"
+        android:layout_gravity="bottom" />
+</LinearLayout>
