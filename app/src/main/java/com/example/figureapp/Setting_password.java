@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Setting_password extends AppCompatActivity {
+public class Setting_password extends BaseActivity {
     TextView tvName;
     ImageView imUser;
     EditText edtNewPassword, edtReNewPass, edtReOldPass;
@@ -59,6 +59,7 @@ public class Setting_password extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_password);
+        setUpActionBar("Setting password");
         AnhXA();
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override

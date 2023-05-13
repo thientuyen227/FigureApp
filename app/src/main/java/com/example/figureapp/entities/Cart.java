@@ -42,14 +42,13 @@ public class Cart implements Serializable {
         this.description = description;
     }
 
-    public Cart(int id, String name, String image, double price, String description,int quantity,int idProduct) {
+    public Cart(int id, String name, String image, double price, String description,int quantity) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.price = price;
         this.description = description;
         this.quantity = quantity;
-        this.idProduct = idProduct;
     }
 
     public int getId() {

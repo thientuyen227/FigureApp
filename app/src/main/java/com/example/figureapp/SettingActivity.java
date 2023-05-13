@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends BaseActivity {
 
     Button btnChangePassWord, btnChangeEmail, btnChangIDCard,btnReturn;
     TextView tvName;
@@ -17,7 +17,7 @@ public class SettingActivity extends AppCompatActivity {
     private void AnhXa()
     {
      btnChangePassWord = findViewById(R.id.btn_changePassWord);
-     btnChangeEmail = findViewById(R.id.btn_changeEmail);
+     btnChangeEmail = findViewById(R.id.btn_changeProfile);
      btnChangIDCard = findViewById(R.id.btn_chaneIdCard);
      btnReturn = findViewById(R.id.btn_return);
      tvName = findViewById(R.id.tv_Name);
@@ -27,6 +27,7 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        setUpActionBar("Setting");
         AnhXa();
         btnChangePassWord.setOnClickListener(new View.OnClickListener() {
             @Override

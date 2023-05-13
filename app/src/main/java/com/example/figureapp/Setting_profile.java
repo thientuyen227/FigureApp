@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Setting_profile extends AppCompatActivity {
+public class Setting_profile extends BaseActivity {
 
     TextView tvName;
     ImageView imUser;
@@ -22,7 +22,7 @@ public class Setting_profile extends AppCompatActivity {
     private void AnhXA()
     {
         edtNewEmail = findViewById(R.id.edt_newEmail);
-        edtRePassWord = findViewById(R.id.edt_RePassWord);
+        edtRePassWord = findViewById(R.id.edt_OldPassWord);
         btnReturn = findViewById(R.id.btn_return);
         btnAccept = findViewById(R.id.btn_accept);
         tvName = findViewById(R.id.tv_Name);
@@ -64,6 +64,7 @@ public class Setting_profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_profile);
+        setUpActionBar("Setting profile");
         AnhXA();
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override

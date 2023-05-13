@@ -12,7 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class Setting_idcard extends AppCompatActivity {
+public class Setting_idcard extends BaseActivity {
     TextView tvName;
     ImageView imUser;
     EditText edtNewIdCard, edtRePassWord;
@@ -21,7 +21,7 @@ public class Setting_idcard extends AppCompatActivity {
     private void AnhXA()
     {
         edtNewIdCard = findViewById(R.id.edt_newIdCard);
-        edtRePassWord = findViewById(R.id.edt_RePassWord);
+        edtRePassWord = findViewById(R.id.edt_OldPassWord);
         btnReturn = findViewById(R.id.btn_return);
         btnAccept = findViewById(R.id.btn_accept);
         tvName = findViewById(R.id.tv_Name);
@@ -63,6 +63,7 @@ public class Setting_idcard extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting_idcard);
+        setUpActionBar("Setting Idcard");
         AnhXA();
         btnReturn.setOnClickListener(new View.OnClickListener() {
             @Override
