@@ -73,7 +73,7 @@ public class Setting_profile extends BaseActivity {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(Setting_profile.this, edtEWallet);
-                popupMenu.getMenuInflater().inflate(R.menu.menuEWallet, popupMenu.getMenu());
+                popupMenu.getMenuInflater().inflate(R.menu.menu_ewallet, popupMenu.getMenu());
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
