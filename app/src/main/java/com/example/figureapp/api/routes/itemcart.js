@@ -18,3 +18,4 @@ router.post('/checkout', authenticateToken, function(req, res, next){
   })
 })
 module.exports = router;
+
