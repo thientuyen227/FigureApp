@@ -113,6 +113,10 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     }
     private void updateProfile(User user){
         Glide.with(getApplicationContext()).load(user.getAvatar()).into(im_profile);
+        tv_name.setText(user.getName());
+        tv_email.setText(user.getEmail());
+        tv_IdCard.setText(user.getIdCard());
+        tv_eWallet.setText(String.valueOf(user.getEWallet()));
     }
     private void initComponents() {
         tv_IdCard = findViewById(R.id.tv_IdCard);

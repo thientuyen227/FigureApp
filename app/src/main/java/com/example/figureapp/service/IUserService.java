@@ -36,7 +36,6 @@ public interface IUserService {
     Call<ArrayList<User>> updateProfile(
             @Field("name") String name,
             @Field("email") String email,
-            @Field("avatar") String avatar,
             @Field("idCard") String idCard,
             @Field("eWallet") int eWallet,
             @Header("Authorization") String token);
