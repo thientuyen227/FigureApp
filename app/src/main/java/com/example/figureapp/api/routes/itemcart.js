@@ -17,5 +17,9 @@ router.post('/checkout', authenticateToken, function(req, res, next){
     res.json(result);
   })
 })
+<<<<<<< HEAD
 module.exports = router;
 
+=======
+module.exports = router;
+>>>>>>> Setting_Order
