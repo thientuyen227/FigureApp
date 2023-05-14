@@ -1,5 +1,4 @@
 const mysql = require('mysql');
-console.log(mysql);
 const connection = mysql.createConnection({
   host: 'localhost', // tên host của database
   user: 'root', // tên đăng nhập của database

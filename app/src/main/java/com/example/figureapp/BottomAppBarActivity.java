@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.figureapp.R;
 import com.example.figureapp.model.FollowingProductModel;
@@ -28,13 +29,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class BottomAppBarActivity extends AppCompatActivity {
-<<<<<<< HEAD
-    FloatingActionButton btnHome, btnCart,btnSetting;
-=======
-    FloatingActionButton btnHome, btnCart, btnFollow;
+    FloatingActionButton btnHome, btnCart,btnSetting, btnFollow;
     private static final String SHARED_PREF_NAME = "volleyregisterlogin";
-    User user;
->>>>>>> develop
+
+    private static final String KEY_TOKEN = "keytoken";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,19 +50,8 @@ public class BottomAppBarActivity extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
-                String token = sharedPreferences.getString("token", ""); // Lấy token đã lưu trong SharedPreferences
-                BaseAPIService.createService(ICartService.class).getAllProductInCart("Bearer " + token).enqueue(new Callback<ArrayList<ProductModel>>() {
-                    @Override
-                    public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
-                        Intent intent = new Intent(BottomAppBarActivity.this, CartActivity.class);
-                        startActivity(intent);
-                    }
-                    @Override
-                    public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-
-                    }
-                });
+                Intent intent = new Intent(BottomAppBarActivity.this, CartActivity.class);
+                startActivity(intent);
             }
         });
         btnFollow = findViewById(R.id.btn_follow);
@@ -82,7 +69,7 @@ public class BottomAppBarActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-
+                        Toast.makeText(BottomAppBarActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }

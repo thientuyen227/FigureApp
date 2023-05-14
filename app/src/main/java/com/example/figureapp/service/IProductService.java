@@ -9,6 +9,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Query;
 
 public interface IProductService {
     @GET("/product/listproducts")
@@ -16,4 +17,6 @@ public interface IProductService {
     @FormUrlEncoded
     @POST("/product/detailproduct")
     Call<ArrayList<ProductModel>> getDetailProduct(@Field("id") int id);
+    @GET("/product/searchProduct")
+    Call<ArrayList<ProductModel>> searchProduct(@Query("keyWord") String query);
 }

@@ -12,12 +12,12 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_item_cart"
-            android:layout_width="401dp"
-            android:layout_height="498dp" />
+            android:layout_width="match_parent"
+            android:layout_height="524dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="132dp"
+            android:layout_height="150dp"
             android:layout_gravity="bottom"
             android:background="@drawable/rounded_background"
             android:elevation="8dp"
@@ -51,6 +51,7 @@
 
             <!-- Nút thanh toán -->
             <Button
+                android:id="@+id/btnCheckout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Checkout"
@@ -60,6 +61,6 @@
         <include
             layout="@layout/activity_bottom_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="100dp" />
+            android:layout_height="80dp" />
     </LinearLayout>
 </ScrollView>

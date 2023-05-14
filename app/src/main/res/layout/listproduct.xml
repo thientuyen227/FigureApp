@@ -34,6 +34,16 @@
             android:text="Product Name"
             android:textColor="#000000"
             android:textSize="18sp" />
+        <TextView
+            android:id="@+id/tvPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="Price"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btn_Add"

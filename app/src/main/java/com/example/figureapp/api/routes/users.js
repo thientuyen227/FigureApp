@@ -2,6 +2,18 @@ var express = require('express');
 var jwt = require('jsonwebtoken');
 
 var router = express.Router();
+const uuid = require('uuid');
+const admin = require('firebase-admin');
+const serviceAccount = require('../serviceAccountKey.json');
+
+
+// Initialize Firebase Admin SDK
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: 'figureapp-b8eb4.appspot.com'
+});
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const { authenticateToken, parseUserId } = require('./helper.js')
 //Connection MySQL
@@ -19,19 +31,40 @@ router.get('/getProfile', authenticateToken, function (req, res, next) {
     res.json(result[0]);
   });
 })
-router.put('/updateProfile', authenticateToken, function (req, res, next) {
+
+
+
+router.put('/changeAvatar', upload.single("avatar") ,authenticateToken, async function (req, res, next) {
   const userId = parseUserId(req);
-  const name = data.name;
-  const email = data.email;
-  const avatar = data.avatar;
-  const idCard = data.idCard;
-  const eWallet = data.eWallet;
-  const sql = 'Update user where id = ? set name = ?, email=?, avatar = ? , idCard=?, eWallet =?'
-  connection.query(sql, [userId, name, email, avatar, idCard, eWallet], (err, result) => {
-    if (err) throw err;
-    res.json(result);
-  });
-})
+  const avatar = req.file;
+  console.log(avatar);
+  const avatarFilename = `avatar-${uuid.v4()}.jpg`;
+  const destination = `resources/image_user/${avatarFilename}`;
+
+  try {
+    // Upload Avatar to Firebase Storage
+    const bucket = admin.storage().bucket();
+    await bucket.upload(avatar.path, {
+      destination: destination,
+      contentType: 'image/jpeg'
+    });
+    // Get signed URL for Avatar file
+    const avatarUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/resources%2Fimage_user%2F${avatarFilename}?alt=media`;
+    console.log(avatarUrl);
+
+    // Update user profile in MySQL database
+    const sql = 'UPDATE user SET avatar = ? WHERE id = ?';
+    const params = [avatarUrl, userId];
+    connection.query(sql, params, (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+});
+
 
 // Login
 router.post('/login', function (req, res, next) {
@@ -43,7 +76,6 @@ router.post('/login', function (req, res, next) {
   connection.query(sql, [username, password], async (error, results) => {
     if (error) throw error;
     const user = results[0]
-    const { password, role, ...others } = user
 
     if (results.length > 0) {
       // Nếu đúng, trả về mã thông  báo (token) đểsử dụng cho các yêu cầu khác
@@ -83,6 +115,6 @@ router.post('/signup', function (req, res, next) {
     }
   });
 });
-
+// router.post('/changeAvatar', upload)
 
 module.exports = router;

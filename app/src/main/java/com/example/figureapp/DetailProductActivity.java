@@ -59,7 +59,7 @@ public class DetailProductActivity extends BaseActivity {
             }
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-                Toast.makeText(DetailProductActivity.this, "Call Api Success", Toast.LENGTH_LONG).show();
+                Toast.makeText(DetailProductActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
             }
         });
     }
