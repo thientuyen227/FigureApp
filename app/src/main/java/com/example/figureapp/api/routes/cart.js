@@ -16,16 +16,6 @@ router.get('/itemcarts', authenticateToken, function (req, res, next) {
   });
 });
 
-router.post('/checkout',authenticateToken,function(req,res,next){
-  const userId = parseUserId(req);
-  const cartList = req.body;
-  const sql = 'Insert into cart(userId) value(?)'
-  connection.query(sql, [userId], (err,result)=>{
-    if(err) throw err;
-    res.json(result);
-  })
-})
-
 router.post('/checkout1', authenticateToken, function(req,res, next){
   const userId =parseUserId(req);
   const cartId = req.body;

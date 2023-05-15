@@ -189,7 +189,6 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
                 FileUtils.copyInputStreamToFile(inputStream, temp);
                 mUri = Uri.fromFile(temp);
                 im_profile.setImageBitmap(MediaStore.Images.Media.getBitmap(getContentResolver(), uri));
-                System.out.println(temp);
                 changeAvatar(temp);
             } catch (IOException e) {
                 e.printStackTrace();

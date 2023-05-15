@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const { authenticateToken, parseUserId } = require('./helper.js')
 
 //Connection MySQL
 const connection = require('./connectionMySQL');
