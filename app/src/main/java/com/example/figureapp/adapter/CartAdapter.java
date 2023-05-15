@@ -57,9 +57,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
 
-                int currentNumber = Integer.parseInt(holder.tvCout.getText().toString());
+                int currentNumber = Integer.parseInt(holder.tvCount.getText().toString());
                 int newNumber = currentNumber + 1;
-                holder.tvCout.setText(String.valueOf(newNumber));
+                holder.tvCount.setText(String.valueOf(newNumber));
 //                String count = holder.tvCout.getText().toString().trim();
 //
 //                carts.setQuantity(Integer.parseInt(count));
@@ -73,9 +73,9 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 // Giảm số lượng sản phẩm xuống 1 đơn vị
-                int currentNumber = Integer.parseInt(holder.tvCout.getText().toString());
+                int currentNumber = Integer.parseInt(holder.tvCount.getText().toString());
                 int newNumber = currentNumber - 1;
-                holder.tvCout.setText(String.valueOf(newNumber));
+                holder.tvCount.setText(String.valueOf(newNumber));
                 // Nếu số lượng sản phẩm bằng 0 thì xóa đối tượng Cart khỏi giỏ hàng
                 if (newNumber == 0) {
                     CartDatabase.getInstance(context).cartDao().deleteProductInCart(carts);
@@ -91,6 +91,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             public void onItemClicked(View view, int position, boolean isLongClick) {
                 Intent intent = new Intent(context, DetailProductActivity.class);
                 intent.putExtra("id", carts.getId());
+                intent.putExtra("count", holder.tvCount.getText().toString());
                 context.startActivity(intent);
             }
         });
@@ -113,7 +114,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView cartImage;
-        TextView cartTitle, cartPrice, tvCout;
+        TextView cartTitle, cartPrice, tvCount;
         ImageButton btnDelete;
         ImageView btnAdd, btnMinus;
 
@@ -127,7 +128,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
             this.btnAdd = itemView.findViewById(R.id.btnAdd);
             this.cartPrice = itemView.findViewById(R.id.tv_price);
             this.btnMinus = itemView.findViewById(R.id.btnMinus);
-            this.tvCout = itemView.findViewById(R.id.tv_cout);
+            this.tvCount = itemView.findViewById(R.id.tv_count);
         }
         public void setItemClickListener(SelectListener selectListener)
         {

@@ -4,7 +4,6 @@ import java.util.List;
 
 public class OrderModel extends AbstractModel<OrderModel> {
     private int userId;
-    private int storeId;
     private User user;
     private List<OrderItemModel> orderitems;
 
@@ -14,14 +13,6 @@ public class OrderModel extends AbstractModel<OrderModel> {
 
     public void setUserId(int userId) {
         this.userId = userId;
-    }
-
-    public int getStoreId() {
-        return storeId;
-    }
-
-    public void setStoreId(int storeId) {
-        this.storeId = storeId;
     }
 
     public User getUser() {

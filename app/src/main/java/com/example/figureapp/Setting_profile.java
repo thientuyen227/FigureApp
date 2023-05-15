@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -49,10 +50,10 @@ public class Setting_profile extends BaseActivity {
     }
     private void setProfile(User user){
         Glide.with(getApplicationContext()).load(user.getAvatar()).into(imUser);
-        tvName.setText(user.getName().toString().trim());
-        edtName.setText(user.getName().toString().trim());
-        edtUserName.setText(user.getUserName().toString().trim());
-        edtEmail.setText(user.getEmail().toString().trim());
+        tvName.setText(user.getName().trim());
+        edtName.setText(user.getName().trim());
+        edtUserName.setText(user.getUserName().trim());
+        edtEmail.setText(user.getEmail().trim());
         int temp_eWallet = user.getEWallet();
         setEWallet(temp_eWallet);
     }
@@ -98,8 +99,7 @@ public class Setting_profile extends BaseActivity {
     }
     private String GetPassWord(User user)
     {
-
-        String passWord=user.getPassword().toString().trim();
+        String passWord=user.getPassword().trim();
         return passWord;
     }
     private void AcceptChangeProfile(){
@@ -170,6 +170,7 @@ public class Setting_profile extends BaseActivity {
                 public void onResponse(Call<User> call, Response<User> response) {
                     setProfile(response.body());
                     passWord=GetPassWord(response.body());
+                    System.out.println(passWord);
                 }
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
@@ -178,16 +179,15 @@ public class Setting_profile extends BaseActivity {
             });
         }
         btnAccept.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-                if(!edtUserName.getText().toString().trim().equals(""))
-                {
-                    Toast.makeText(Setting_profile.this, "Không thể để trống Username!", Toast.LENGTH_SHORT).show();
-                } else if (!edtName.getText().toString().trim().equals("")) {
+                System.out.println(edtName.getText().toString().trim().equals(""));
+                if (edtName.getText().toString().trim().equals("")) {
                     Toast.makeText(Setting_profile.this, "Không thể để trống Fullname!", Toast.LENGTH_SHORT).show();
-                } else if (!edtEmail.getText().toString().trim().equals("")) {
+                } else if (edtEmail.getText().toString().trim().equals("")) {
                     Toast.makeText(Setting_profile.this, "Không thể để trống Email!", Toast.LENGTH_SHORT).show();
-                } else if (!edtEWallet.getText().toString().trim().equals("")) {
+                } else if (edtEWallet.getText().toString().trim().equals("")) {
                     Toast.makeText(Setting_profile.this, "Không thể để trống Phương thức thanh toán!", Toast.LENGTH_SHORT).show();
                 } else if (!passWord.equals(edtRePassWord.getText().toString().trim())) {
                     Toast.makeText(Setting_profile.this, "Mật khẩu không chính xác!", Toast.LENGTH_SHORT).show();

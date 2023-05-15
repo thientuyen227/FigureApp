@@ -113,27 +113,19 @@ public class Setting_password extends BaseActivity {
         btnAccept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(edtNewPassword.getText().toString().trim().equals(edtReNewPass)
-                        && edtReOldPass.getText().toString().trim().equals(oldPass)
-                        &&!edtNewPassword.getText().toString().trim().equals("")
-                        &&!edtReNewPass.getText().toString().trim().equals(""))
-                    {
-                        AcceptChangePassWord();
-                    }
-                else {
-                        if(edtNewPassword.getText().toString().trim().equals(""))
-                            Toast.makeText(Setting_password.this, "Mật khẩu mới không được để trống!",
-                                    Toast.LENGTH_SHORT).show();
-                        else {
-                            if(!edtNewPassword.getText().toString().trim().equals(edtReNewPass))
-                                Toast.makeText(Setting_password.this, "Nhập lại mật khẩu mới không chính xác!",
-                                        Toast.LENGTH_SHORT).show();
-                            else {
-                                if(!edtReOldPass.getText().toString().trim().equals(oldPass))
-                                    Toast.makeText(Setting_password.this, "Nhập lại mật khẩu không chính xác!",
-                                            Toast.LENGTH_SHORT).show();
-                            }
-                        }
+                if(edtNewPassword.getText().toString().trim().equals(""))
+                {
+                    Toast.makeText(Setting_password.this, "Không để trống mật khẩu mới", Toast.LENGTH_SHORT).show();
+                } else if(edtReNewPass.getText().toString().trim().equals(""))
+                {
+                    Toast.makeText(Setting_password.this, "Không để trống nhập lại mật khẩu mới", Toast.LENGTH_SHORT).show();
+                } else if (!edtNewPassword.getText().toString().trim().equals(edtReNewPass.getText().toString().trim())) {
+                    Toast.makeText(Setting_password.this, "Nhập lại mật khẩu mới không chính xác", Toast.LENGTH_SHORT).show();
+                } else if (!edtReOldPass.getText().toString().trim().equals(oldPass))
+                {
+                    Toast.makeText(Setting_password.this, "Nhập lại mật khẩu không chính xác", Toast.LENGTH_SHORT).show();
+                } else {
+                    AcceptChangePassWord();
                 }
             }
         });

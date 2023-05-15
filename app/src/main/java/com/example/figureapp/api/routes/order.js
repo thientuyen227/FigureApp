@@ -31,13 +31,13 @@ router.get('/listorders', authenticateToken, function(req,res, next){
   })
 })
 router.post('/checkout', authenticateToken, (req, res) => {
+  console.log("hello");
+  const userId = parseUserId(req);
   // Lấy danh sách id sản phẩm từ yêu cầu POST
   const idProduct = req.body.idProduct.map(idProduct=> parseInt(idProduct));
   const count = req.body.count.map(count => parseInt(count));
-  const userId = parseUserId(req);
-  console.log(idProduct);
-  console.log(count);
-  console.log(userId);
+
+  
   sql = 'INSERT INTO orders (userid) VALUES (?)'
   // Thực hiện thêm bản ghi mới vào bảng `orders`
   connection.query(sql, [userId], (error, results) => {

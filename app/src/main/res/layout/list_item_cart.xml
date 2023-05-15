@@ -71,7 +71,7 @@
                     android:src="@drawable/ic_minus" />
 
                 <TextView
-                    android:id="@+id/tv_cout"
+                    android:id="@+id/tv_count"
                     android:layout_width="54dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

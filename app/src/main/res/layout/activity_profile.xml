@@ -31,15 +31,6 @@
                 android:src="@drawable/ic_profile"></ImageView>
 
             <Button
-                android:id="@+id/btn_ChooseAvatar"
-                android:layout_width="193dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:backgroundTint="@color/colorPrimary"
-                android:layout_marginTop="10dp"
-                android:text="Choose avatar"></Button>
-
-            <Button
                 android:id="@+id/btn_UploadAvatar"
                 android:layout_width="196dp"
                 android:layout_height="wrap_content"

@@ -61,7 +61,7 @@ public class OrderActivity extends BaseActivity implements ProductAdapter.iClick
         });
     }
     private void initComponents() {
-        productRecyclerView = findViewById(R.id.product_recyclerview);
+        productRecyclerView = findViewById(R.id.rc_order);
     }
     private void initData() {
         orderModels = new ArrayList<>();

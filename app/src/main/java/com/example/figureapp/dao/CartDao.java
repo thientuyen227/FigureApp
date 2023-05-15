@@ -26,4 +26,8 @@ public interface CartDao {
     void deleteProductInCart(Cart... cart);
     @Update
     void updateProductInCart(Cart... cart);
+    @Query("DELETE FROM cart")
+    void deleteAllProductsInCart();
+
+
 }

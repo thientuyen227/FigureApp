@@ -29,9 +29,12 @@ import com.example.figureapp.model.CartModel;
 import com.example.figureapp.model.ProductModel;
 import com.example.figureapp.service.BaseAPIService;
 import com.example.figureapp.service.ICartService;
+import com.example.figureapp.service.IOrderService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -65,29 +68,31 @@ public class CartActivity extends BaseActivity implements ProductAdapter.iClickL
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL,false);
         productRecyclerView.setLayoutManager(linearLayoutManager);
         productRecyclerView.setAdapter(cartAdapter);
-        CartModel cartModel = new CartModel();
-        List<Integer> cartList = CartDatabase.getInstance(getApplicationContext()).cartDao().getAllIdProduct();
+        List<Integer> cartList = carts.stream().map(Cart::getId).collect(Collectors.toList());
+        List<Integer> countList = Arrays.asList(1, 2);
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaseAPIService.createService(ICartService.class).checkOutCart(cartList,"Bearer " + token).enqueue(new Callback<List<Cart>>() {
+                BaseAPIService.createService(IOrderService.class).checkoutOrder(cartList, countList ,"Bearer " + token).enqueue(new Callback<List<Cart>>() {
                     @Override
                     public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
-                        carts= response.body();
-                        cartAdapter = new CartAdapter(carts, CartActivity.this);
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CartActivity.this, LinearLayoutManager.VERTICAL,false);
-                        productRecyclerView.setLayoutManager(linearLayoutManager);
-                        productRecyclerView.setAdapter(cartAdapter);
+                        Toast.makeText(CartActivity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
+                        CartDatabase.getInstance(getApplicationContext()).cartDao().deleteAllProductsInCart();
+                        // Reload lại giỏ hàng
+                        CartDatabase.getInstance(getApplicationContext()).cartDao().updateProductInCart();
+                        loadCart();
+                        startActivity(new Intent(CartActivity.this,HomeActivity.class));
                     }
                     @Override
                     public void onFailure(Call<List<Cart>> call, Throwable t) {
+                        Log.e("Checkout Error", t.getMessage());
                         Toast.makeText(CartActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
         });
 
-//
+
     }
     private void initComponents() {
         productRecyclerView = findViewById(R.id.rv_item_cart);

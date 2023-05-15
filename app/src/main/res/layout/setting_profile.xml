@@ -58,12 +58,7 @@
             android:background="@drawable/textview_border"
             android:gravity="center"
             android:text="Chang Profile"
-            android:textAlignment="center"
-            android:textSize="20sp"
-            tools:ignore="MissingConstraints,RtlCompat"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="165dp"
-            android:textStyle="bold"/>
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <LinearLayout
