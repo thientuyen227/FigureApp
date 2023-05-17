@@ -15,9 +15,10 @@ admin.initializeApp({
 const multer = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
-const { authenticateToken, parseUserId } = require('./helper.js')
+const { authenticateToken, parseUserId, parseRole } = require('./helper.js')
 //Connection MySQL
 const connection = require('./connectionMySQL');
+const { route } = require('./product');
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   res.send('respond with a resource');
@@ -32,12 +33,9 @@ router.get('/getProfile', authenticateToken, function (req, res, next) {
   });
 })
 
-
-
 router.put('/changeAvatar', upload.single("avatar") ,authenticateToken, async function (req, res, next) {
   const userId = parseUserId(req);
   const avatar = req.file;
-  console.log(avatar);
   const avatarFilename = `avatar-${uuid.v4()}.jpg`;
   const destination = `resources/image_user/${avatarFilename}`;
 
@@ -50,7 +48,6 @@ router.put('/changeAvatar', upload.single("avatar") ,authenticateToken, async fu
     });
     // Get signed URL for Avatar file
     const avatarUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/resources%2Fimage_user%2F${avatarFilename}?alt=media`;
-    console.log(avatarUrl);
 
     // Update user profile in MySQL database
     const sql = 'UPDATE user SET avatar = ? WHERE id = ?';
@@ -79,7 +76,7 @@ router.post('/login', function (req, res, next) {
 
     if (results.length > 0) {
       // Nếu đúng, trả về mã thông  báo (token) đểsử dụng cho các yêu cầu khác
-      const token = jwt.sign({ userId: user.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3d' });
+      const token = jwt.sign({ userId: user.id, role: user.role }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '3d' });
       res.json({ success: true, token: token});
     } else {
       // Nếu sai, trả về thông báo lỗi
@@ -91,7 +88,11 @@ router.post('/login', function (req, res, next) {
 
 // Signup
 router.post('/signup', function (req, res, next) {
-  const { username, email, password } = req.body;
+  const username = req.body.username;
+  console.log(username);
+  const email = req.body.email;
+  const password = req.body.password;
+  const name = req.body.name
   // Kiểm tra nếu username hoặc email đã tồn tại trong database
   connection.query('SELECT * FROM user WHERE username = ? OR email = ?', [username, email], (err, results) => {
     if (err) throw err;
@@ -105,7 +106,7 @@ router.post('/signup', function (req, res, next) {
       }
     } else {
       // Thêm mới user vào bảng user
-      connection.query('INSERT INTO user (userName,email,password) VALUES (?, ?, ?)', [username, email, password], (err, result) => {
+      connection.query('INSERT INTO user (userName,email,password,name) VALUES (?, ?, ?,?)', [username, email, password, name], (err, result) => {
         if (err) throw err;
 
         // Trả về thông tin user vừa tạo
@@ -117,4 +118,68 @@ router.post('/signup', function (req, res, next) {
 });
 // router.post('/changeAvatar', upload)
 
+
+//admin
+//
+router.get('/getAllUser', authenticateToken, function(req, res, next){
+  const role= parseRole(req);
+  if(role!="admin"){
+    res.status(404).json({success: false})
+  }
+  else{
+    sql = 'select * from user'
+    connection.query(sql, (err, result)=>{
+      if(err) throw err;
+      else res.json(result)
+    })
+  }
+})
+//
+router.post('/getUser', function(req,res, next){
+  const userId = req.body.userId;
+  const sql = 'select * from user where id = ?';
+  connection.query(sql, [userId], (err, result) => {
+    if (err) throw err;
+    res.json(result[0]);
+  });
+})
+//
+router.post('/deleteUser', authenticateToken, function(req, res, next){
+  const role = parseRole(req)
+  if(role != 'admin'){
+    res.status(404).json({success: false})
+  }
+  else{
+    const userId=req.body.userId;
+    console.log(userId);
+    const deleteUser = 'delete from user where id=?'
+    connection.query(deleteUser, userId, (err, result)=>{
+      if(err) throw err;
+      else res.json(result);
+    })
+  }
+})
+//editUser
+router.put('/editUser', authenticateToken, function(req, res, next){
+  const roles = parseRole(req);
+  if(roles!= "admin"){
+    res.status(404).json({success: false})
+  }
+  else{
+    const userId= req.body.userId;
+    const name =req.body.name;
+    const email = req.body.email;
+    const password = req.body.password;
+    const role = req.body.role;
+    const idCard = req.body.idCard;
+    const eWallet = req.body.eWallet;
+    console.log(userId);
+    const editCategory='Update user set name=?, email=?, password=?, role=?, idCard=?, eWallet=? where id=?'
+    const params=[name, email, password, role, idCard, eWallet, userId];
+    connection.query(editCategory, params, (err, result)=>{
+      if(err) throw err;
+      else res.json({success: true})
+    })
+  }
+})
 module.exports = router;

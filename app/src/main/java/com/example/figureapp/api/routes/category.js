@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-
+const {authenticateToken, parseRole} = require('./helper.js');
 //Connection MySQL
 const connection = require('./connectionMySQL');
 /* GET users listing. */
@@ -24,5 +24,49 @@ router.post('/products', function(req,res, next){
     if (err) throw err;
     res.json(result);
   });
+})
+router.post('/addCategory', authenticateToken, function(req, res, next){
+  const role = parseRole(req);
+  if(role!= "admin"){
+    res.status(404).json({success: false})
+  }
+  else{
+    const nameCategory= req.body.nameCategory;
+    const insertCategory='Insert into category (nameCategory) value (?)'
+    connection.query(insertCategory, nameCategory, (err, result)=>{
+      if(err) throw err;
+      else res.json({success: true})
+    })
+  }
+})
+router.put('/editCategory', authenticateToken, function(req, res, next){
+  const role = parseRole(req);
+  if(role!= "admin"){
+    res.status(404).json({success: false})
+  }
+  else{
+    const nameCategory= req.body.nameCategory;
+    const idCategory = req.body.idCategory;
+    const editCategory='Update category set nameCategory= ? where idCategory=?'
+    const params=[nameCategory, idCategory];
+    connection.query(editCategory, params, (err, result)=>{
+      if(err) throw err;
+      else res.json({success: true})
+    })
+  }
+})
+router.delete('/deleteCategory', authenticateToken, function(req, res, next){
+  const role = parseRole(req);
+  if(role!= "admin"){
+    res.status(404).json({success: false})
+  }
+  else{
+    const idCategory = req.body.idCategory;
+    const deleteCategory='delete from category where idCategory=?'
+    connection.query(deleteCategory, idCategory, (err, result)=>{
+      if(err) throw err;
+      else res.json({success: true})
+    })
+  }
 })
 module.exports = router;

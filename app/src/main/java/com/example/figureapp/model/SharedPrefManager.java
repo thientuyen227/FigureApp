@@ -27,6 +27,7 @@ public class SharedPrefManager {
     private static final String KEY_AVATAR = "keyavatar";
 
     private static final String KEY_NAME = "keyname";
+    private static final String KEY_ROLE = "keyrole";
     private static SharedPrefManager mInstance;
     private static Context ctx;
     //khỏi tạo constructor
@@ -45,8 +46,10 @@ public class SharedPrefManager {
         editor.putString(KEY_NAME, user.getName());
         editor.putString(KEY_EMAIL, user.getEmail());
         editor.putString(KEY_IDCARD, user.getIdCard());
+        editor.putString(KEY_PASSWORD, user.getPassword());
         editor.putString(KEY_AVATAR, user.getAvatar());
         editor.putInt(KEY_EWALLET, user.getEWallet());
+        editor.putString(KEY_ROLE, user.getRole());
         editor.apply();
     }
     //this method will checker whether user is already logged in or not
@@ -64,10 +67,12 @@ public class SharedPrefManager {
         SharedPreferences sharedPreferences = ctx.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE);
         return new User(
                 sharedPreferences.getString (KEY_NAME,  null),
+                sharedPreferences.getString(KEY_AVATAR,null),
                 sharedPreferences.getString (KEY_EMAIL,  null),
                 sharedPreferences.getString(KEY_IDCARD,null),
-                sharedPreferences.getString(KEY_AVATAR,null),
-                sharedPreferences.getInt (KEY_EWALLET,  0)
+                sharedPreferences.getInt (KEY_EWALLET,  0),
+                sharedPreferences.getString (KEY_ROLE,  null),
+                sharedPreferences.getString(KEY_PASSWORD, null)
                 );
     }
     //this method will logout the user

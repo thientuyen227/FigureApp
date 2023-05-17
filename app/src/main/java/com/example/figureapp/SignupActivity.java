@@ -22,7 +22,7 @@ import retrofit2.Callback;
 
 public class SignupActivity extends AppCompatActivity {
 
-    EditText editTextUsername, editTextEmail,editTextPassword;
+    EditText editTextUsername, editTextEmail,editTextPassword, editTextName;
     Button btnSignup;
     TextView txtLogin;
 
@@ -39,6 +39,8 @@ public class SignupActivity extends AppCompatActivity {
         editTextUsername =findViewById(R.id.editTextUsername);
         editTextEmail = findViewById(R.id.editTextEmail);
         editTextPassword = findViewById(R.id.editTextPassword);
+        editTextName = findViewById(R.id.edtName);
+
         btnSignup = findViewById(R.id.btn_signup);
         txtLogin = findViewById(R.id.textLogin);
         btnSignup.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +50,7 @@ public class SignupActivity extends AppCompatActivity {
                 String username= editTextUsername.getText().toString().trim();
                 String password= editTextPassword.getText().toString().trim();
                 String email= editTextEmail.getText().toString().trim();
+                String name = editTextName.getText().toString().trim();
 
                 //kiem tra du lieu da nhap vao
                 if(username.isEmpty()){
@@ -70,13 +73,13 @@ public class SignupActivity extends AppCompatActivity {
                     editTextPassword.requestFocus();
                     return;
                 }
-                BaseAPIService.createService(IUserService.class).signUp(username,email,password).enqueue(new Callback<Response>() {
+                BaseAPIService.createService(IUserService.class).signUp(username,email,password, name).enqueue(new Callback<Response>() {
                     @Override
                     public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
                         if (response.isSuccessful()){
                             Toast.makeText(SignupActivity.this, "Dang ki thanh cong", Toast.LENGTH_SHORT).show();
                             //Luu thong tin tai khoan vao Shared Preferences
-                            User user = new User(username,email,password);
+                            User user = new User(username,email,password, name);
                             SharedPrefManager.getInstance(SignupActivity.this).userLogin(user);
                             //Chuyen sang Login neu thanh cong
                             Intent intent =new Intent(SignupActivity.this,HomeActivity.class);

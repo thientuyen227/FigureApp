@@ -18,4 +18,10 @@ function parseUserId(req){
   const data = jwt.decode(token);
   return data.userId;
 }
-module.exports={authenticateToken, parseUserId};  
+function parseRole(req){
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+  const data = jwt.decode(token);
+  return data.role;
+}
+module.exports={authenticateToken, parseUserId, parseRole};  

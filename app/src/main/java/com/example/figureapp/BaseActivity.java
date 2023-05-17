@@ -66,7 +66,8 @@ public class BaseActivity extends BottomAppBarActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user= response.body();
-                Glide.with(getApplicationContext()).load(user.getAvatar()).into(btnProfile);
+                if(user.getAvatar()!= null)
+                    Glide.with(getApplicationContext()).load(user.getAvatar()).into(btnProfile);
             }
             @Override
             public void onFailure(Call<User> call, Throwable t) {

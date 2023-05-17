@@ -73,9 +73,9 @@ public class CartActivity extends BaseActivity implements ProductAdapter.iClickL
         btnCheckout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaseAPIService.createService(IOrderService.class).checkoutOrder(cartList, countList ,"Bearer " + token).enqueue(new Callback<List<Cart>>() {
+                BaseAPIService.createService(IOrderService.class).checkoutOrder(cartList, countList ,"Bearer " + token).enqueue(new Callback<Cart>() {
                     @Override
-                    public void onResponse(Call<List<Cart>> call, Response<List<Cart>> response) {
+                    public void onResponse(Call<Cart> call, Response<Cart> response) {
                         Toast.makeText(CartActivity.this, "Đã thêm thành công", Toast.LENGTH_SHORT).show();
                         CartDatabase.getInstance(getApplicationContext()).cartDao().deleteAllProductsInCart();
                         // Reload lại giỏ hàng
@@ -84,7 +84,7 @@ public class CartActivity extends BaseActivity implements ProductAdapter.iClickL
                         startActivity(new Intent(CartActivity.this,HomeActivity.class));
                     }
                     @Override
-                    public void onFailure(Call<List<Cart>> call, Throwable t) {
+                    public void onFailure(Call<Cart> call, Throwable t) {
                         Log.e("Checkout Error", t.getMessage());
                         Toast.makeText(CartActivity.this, "Đã có lỗi xảy ra. Vui lòng thử lại sau.", Toast.LENGTH_SHORT).show();
                     }

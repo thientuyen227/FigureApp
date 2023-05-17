@@ -170,7 +170,6 @@ public class Setting_profile extends BaseActivity {
                 public void onResponse(Call<User> call, Response<User> response) {
                     setProfile(response.body());
                     passWord=GetPassWord(response.body());
-                    System.out.println(passWord);
                 }
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
@@ -182,7 +181,6 @@ public class Setting_profile extends BaseActivity {
 
             @Override
             public void onClick(View v) {
-                System.out.println(edtName.getText().toString().trim().equals(""));
                 if (edtName.getText().toString().trim().equals("")) {
                     Toast.makeText(Setting_profile.this, "Không thể để trống Fullname!", Toast.LENGTH_SHORT).show();
                 } else if (edtEmail.getText().toString().trim().equals("")) {

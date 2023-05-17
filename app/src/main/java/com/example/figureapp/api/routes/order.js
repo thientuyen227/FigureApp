@@ -31,14 +31,14 @@ router.get('/listorders', authenticateToken, function(req,res, next){
   })
 })
 router.post('/checkout', authenticateToken, (req, res) => {
-  console.log("hello");
+ 
   const userId = parseUserId(req);
   // Lấy danh sách id sản phẩm từ yêu cầu POST
   const idProduct = req.body.idProduct.map(idProduct=> parseInt(idProduct));
   const count = req.body.count.map(count => parseInt(count));
 
   
-  sql = 'INSERT INTO orders (userid) VALUES (?)'
+  sql = 'INSERT INTO orders (userid) VALUES (?)' 
   // Thực hiện thêm bản ghi mới vào bảng `orders`
   connection.query(sql, [userId], (error, results) => {
     if (error) throw error;
@@ -51,7 +51,7 @@ router.post('/checkout', authenticateToken, (req, res) => {
     connection.query(itemOrders, [values], (error, results) => {
       if (error) throw error;
       // Trả về thông báo thành công cho trang checkout
-      res.send('Checkout successful!');
+      res.json({ success: true})
     });
   });
 });

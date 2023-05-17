@@ -18,5 +18,5 @@ public interface IOrderService {
     Call<ArrayList<OrderModel>> getAllOrderItem(@Header("Authorization") String token);
     @FormUrlEncoded
     @POST("/order/checkout")
-    Call<List<Cart>> checkoutOrder(@Field("idProduct") List<Integer> productId, @Field("count") List<Integer> count, @Header("Authorization") String token);
+    Call<Cart> checkoutOrder(@Field("idProduct") List<Integer> productId, @Field("count") List<Integer> count, @Header("Authorization") String token);
 }
