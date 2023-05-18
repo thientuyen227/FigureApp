@@ -57,7 +57,6 @@ public class UpdateUserActivity extends BaseActivity {
                                 Toast.makeText(UpdateUserActivity.this, "Update user thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(UpdateUserActivity.this, MainActivity.class));
                             }
-
                             @Override
                             public void onFailure(Call<User> call, Throwable t) {
                                 Toast.makeText(UpdateUserActivity.this, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();

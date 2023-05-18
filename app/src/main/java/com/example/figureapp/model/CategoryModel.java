@@ -26,4 +26,5 @@ public class CategoryModel extends AbstractModel<CategoryModel> {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

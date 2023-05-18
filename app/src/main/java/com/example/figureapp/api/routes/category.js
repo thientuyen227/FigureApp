@@ -25,13 +25,21 @@ router.post('/products', function(req,res, next){
     res.json(result);
   });
 })
+router.get('/getAllCategory', function(req, res, next){
+  const sql = 'select idcategory as id, nameCategory as name from category';
+  connection.query(sql, (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+});
 router.post('/addCategory', authenticateToken, function(req, res, next){
   const role = parseRole(req);
   if(role!= "admin"){
     res.status(404).json({success: false})
   }
   else{
-    const nameCategory= req.body.nameCategory;
+    const nameCategory= req.body.categoryName;
+    console.log(nameCategory);
     const insertCategory='Insert into category (nameCategory) value (?)'
     connection.query(insertCategory, nameCategory, (err, result)=>{
       if(err) throw err;
@@ -45,17 +53,18 @@ router.put('/editCategory', authenticateToken, function(req, res, next){
     res.status(404).json({success: false})
   }
   else{
-    const nameCategory= req.body.nameCategory;
-    const idCategory = req.body.idCategory;
+    const name= req.body.name;
+    const id = req.body.id;
+    console.log(name);
     const editCategory='Update category set nameCategory= ? where idCategory=?'
-    const params=[nameCategory, idCategory];
+    const params=[name, id];
     connection.query(editCategory, params, (err, result)=>{
       if(err) throw err;
       else res.json({success: true})
     })
   }
 })
-router.delete('/deleteCategory', authenticateToken, function(req, res, next){
+router.post('/deleteCategory', authenticateToken, function(req, res, next){
   const role = parseRole(req);
   if(role!= "admin"){
     res.status(404).json({success: false})

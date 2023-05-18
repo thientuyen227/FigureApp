@@ -43,6 +43,18 @@ public class MainActivity extends BaseActivity {
                 startActivity(new Intent(MainActivity.this, UserActivity.class));
             }
         });
+        btnCategories.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CategoryActivity.class));
+            }
+        });
+        btnProducts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ProductActivity.class));
+            }
+        });
     }
     private void load(){
         SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);

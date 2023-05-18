@@ -6,6 +6,17 @@ public class ProductModel extends AbstractModel<ProductModel> {
     private double price;
     private int idProduct, quantity;
 
+    public ProductModel(String name, int idCategory, String description, double price, int quantity) {
+        super();
+        this.name =name;
+        this.idCategory = idCategory;
+        this.description = description;
+        this.price =price;
+        this.quantity = quantity;
+    }
+
+
+
     public int getQuantity() {
         return quantity;
     }

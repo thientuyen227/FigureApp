@@ -35,7 +35,7 @@ router.post('/detailproduct',function(req,res, next){
       });
 });
 
-router.delete('/deleteProduct', authenticateToken, function(req,res){
+router.post('/deleteProduct', authenticateToken, function(req,res){
   const role = parseRole(req);
   
   if(role !="admin"){
@@ -64,31 +64,31 @@ router.put('/editProduct', upload.single("imageProduct"), authenticateToken, asy
     res.status(404).json({ success: false});
   }
   else{
-    const image_product = req.file;
-    const productFilename = `product-${uuid.v4()}.jpg`;
-    const destination = `resources/image_product/${productFilename}`;
+    // const image_product = req.file;
+    // const productFilename = `product-${uuid.v4()}.jpg`;
+    // const destination = `resources/image_product/${productFilename}`;
     try {
       // Upload Avatar to Firebase Storage
-      const bucket = admin.storage().bucket();
-      await bucket.upload(image_product.path, {
-        destination: destination,
-        contentType: 'image/jpeg'
-      });
-      //Get signed URL for Avatar file
-      const productUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/resources%2Fimage_product%2F${productFilename}?alt=media`;
+      // const bucket = admin.storage().bucket();
+      // await bucket.upload(image_product.path, {
+      //   destination: destination,
+      //   contentType: 'image/jpeg'
+      // });
+      // //Get signed URL for Avatar file
+      // const productUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/resources%2Fimage_product%2F${productFilename}?alt=media`;
   
       // Update user profile in MySQL database
       const { productName, description, price, quantity, idCategory } = req.body;
-      console.log(description);
       const sql = 'update product set name =?, description= ?,price= ?,quantity= ?,idCategory= ? where id=?';
       const params = [productName, description, price, quantity, idCategory, productId];
       connection.query(sql, params, (err, result) => {
         if (err) throw err;
-        const insertImageProduct = 'update Image_Product set address= ? where productId=?'
-        connection.query(insertImageProduct,[productUrl, productId], (err,result)=>{
-          if(err) throw err;
-          res.json({success: true})
-        })
+        // const insertImageProduct = 'update Image_Product set address= ? where productId=?'
+        // connection.query(insertImageProduct,[productUrl, productId], (err,result)=>{
+        //   if(err) throw err;
+        //   res.json({success: true})
+        // })
+        res.json({success: true})
       });
     } catch (error) {
       console.log(error);
@@ -96,6 +96,16 @@ router.put('/editProduct', upload.single("imageProduct"), authenticateToken, asy
     }
   }
 })
+
+router.get('/getProduct', function(req,res, next){
+  const productId=req.body.productId;
+  const sql = 'select product.id, product.name, product.description, product.quantity, product.idCategory, product.name, product.price, product.rating, image_product.address as imageProduct from product inner join image_product on product.id = image_product.productid';
+  const sql1 = 'select * from ('+sql+') as A where id=? '
+  connection.query(sql1,[productId], (err, result) => {
+      if (err) throw err;
+      res.json(result);
+    });
+});
 
 router.post('/addProduct', upload.single("imageProduct"), authenticateToken, async function(req,res, next){
   const role = parseRole(req);
