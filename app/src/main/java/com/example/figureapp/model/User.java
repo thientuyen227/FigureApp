@@ -28,6 +28,13 @@ public class User extends AbstractModel<User> {
         this.name = name;
     }
 
+    public User(String name, String email, int eWallet) {
+        super();
+        this.name = name;
+        this.email = email;
+        this.eWallet=eWallet;
+    }
+
 
     public String getRole() {
         return role;

@@ -115,8 +115,18 @@ public class Setting_profile extends BaseActivity {
                 BaseAPIService.createService(IUserService.class).getProfile("Bearer "+token).enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-                        SetNewProfile(response.body());
-                        Toast.makeText(Setting_profile.this, "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
+                        User user = SetNewProfile();
+                        BaseAPIService.createService(IUserService.class).updateProfile(user.getName(), user.getEmail(), user.getEWallet(), "Bearer " + token).enqueue(new Callback<User>() {
+                            @Override
+                            public void onResponse(Call<User> call, Response<User> response) {
+                                Toast.makeText(Setting_profile.this, "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onFailure(Call<User> call, Throwable t) {
+                                Toast.makeText(Setting_profile.this, "Thay đổi thông tin thất bại!", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
@@ -148,12 +158,14 @@ public class Setting_profile extends BaseActivity {
         }
         return value;
     }
-    private void SetNewProfile(User user)
+    private User SetNewProfile()
     {
-        user.setName(edtName.getText().toString().trim());
-        user.setUserName(edtUserName.getText().toString().trim());
-        user.setEmail(edtEmail.getText().toString().trim());
-        user.setEWallet(ValueEWallet(edtEWallet.getText().toString().trim()));
+        User tmp_user = new User(
+                edtName.getText().toString().trim(),
+                edtEmail.getText().toString().trim(),
+                Integer.parseInt(edtEWallet.getText().toString().trim())
+        );
+        return tmp_user;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {

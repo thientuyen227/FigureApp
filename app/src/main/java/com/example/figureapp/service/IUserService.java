@@ -58,10 +58,9 @@ public interface IUserService {
             @Header("Authorization") String token);
     @FormUrlEncoded
     @PUT("/users/updateProfile")
-    Call<ArrayList<User>> updateProfile(
+    Call<User> updateProfile(
             @Field("name") String name,
             @Field("email") String email,
-            @Field("idCard") String idCard,
             @Field("eWallet") int eWallet,
             @Header("Authorization") String token);
 }
