@@ -4,7 +4,7 @@ package com.example.figureapp.model;
 public class ProductModel extends AbstractModel<ProductModel> {
     private String name, description, imageProduct;
     private double price;
-    private int idProduct, quantity;
+    private int quantity;
 
     public ProductModel(String name, int idCategory, String description, double price, int quantity) {
         super();
@@ -57,13 +57,6 @@ public class ProductModel extends AbstractModel<ProductModel> {
 
     public void setImageProduct(String imageProduct) {
         this.imageProduct = imageProduct;
-    }
-    public int getIdProduct() {
-        return idProduct;
-    }
-
-    public void setIdProduct(int idProduct) {
-        this.idProduct = idProduct;
     }
 
     public int getIdCategory() {

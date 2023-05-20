@@ -57,9 +57,11 @@ router.post('/deleteProduct', authenticateToken, function(req,res){
   }
 })
 
-router.put('/editProduct', upload.single("imageProduct"), authenticateToken, async function(req,res, next){
+router.put('/editProduct', authenticateToken, function(req,res, next){
   const role = parseRole(req);
+  console.log(role);
   const productId = req.body.productId;
+  
   if(role!='admin'){
     res.status(404).json({ success: false});
   }
@@ -83,6 +85,7 @@ router.put('/editProduct', upload.single("imageProduct"), authenticateToken, asy
       const params = [productName, description, price, quantity, idCategory, productId];
       connection.query(sql, params, (err, result) => {
         if (err) throw err;
+        console.log(result);
         // const insertImageProduct = 'update Image_Product set address= ? where productId=?'
         // connection.query(insertImageProduct,[productUrl, productId], (err,result)=>{
         //   if(err) throw err;
@@ -107,24 +110,24 @@ router.get('/getProduct', function(req,res, next){
     });
 });
 
-router.post('/addProduct', upload.single("imageProduct"), authenticateToken, async function(req,res, next){
+router.post('/addProduct',  authenticateToken, function(req,res, next){
   const role = parseRole(req);
   if(role!='admin'){
     res.status(404).json({ success: false});
   }
   else{
-    const image_product = req.file;
-    const productFilename = `product-${uuid.v4()}.jpg`;
-    const destination = `resources/image_product/${productFilename}`;
-    try {
-      // Upload Avatar to Firebase Storage
-      const bucket = admin.storage().bucket();
-      await bucket.upload(image_product.path, {
-        destination: destination,
-        contentType: 'image/jpeg'
-      });
-      //Get signed URL for Avatar file
-      const productUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/resources%2Fimage_product%2F${productFilename}?alt=media`;
+    // const image_product = req.file;
+    // const productFilename = `product-${uuid.v4()}.jpg`;
+    // const destination = `resources/image_product/${productFilename}`;
+     try {
+    //   // Upload Avatar to Firebase Storage
+    //   const bucket = admin.storage().bucket();
+    //   await bucket.upload(image_product.path, {
+    //     destination: destination,
+    //     contentType: 'image/jpeg'
+    //   });
+    //   //Get signed URL for Avatar file
+    //   const productUrl = `https://firebasestorage.googleapis.com/v0/b/${bucket.name}/o/resources%2Fimage_product%2F${productFilename}?alt=media`;
   
       // Update user profile in MySQL database
       const { productName, description, price, quantity, idCategory } = req.body;
@@ -133,12 +136,12 @@ router.post('/addProduct', upload.single("imageProduct"), authenticateToken, asy
       const params = [productName, description, price, quantity, idCategory];
       connection.query(sql, params, (err, result) => {
         if (err) throw err;
-        const productId = result.insertId;
-        const insertImageProduct = 'insert into Image_Product(address,productId) values (?,?)'
-        connection.query(insertImageProduct,[productUrl, productId], (err,result)=>{
-          if(err) throw err;
+        // const productId = result.insertId;
+        // const insertImageProduct = 'insert into Image_Product(address,productId) values (?,?)'
+        // connection.query(insertImageProduct,[productUrl, productId], (err,result)=>{
+        //   if(err) throw err;
           res.json({success: true})
-        })
+        //})
       });
     } catch (error) {
       console.log(error);

@@ -58,21 +58,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_NAME, MODE_PRIVATE);
         String token = sharedPreferences.getString(KEY_TOKEN, null);
-        ProductModel productModel = productModels.get(position);
-        holder.edtNameProduct.setText(productModel.getName());
-        holder.edtIdCategory.setText(String.valueOf(productModel.getIdCategory()));
-        holder.edtPrice.setText(String.valueOf(productModel.getPrice()));
-        holder.edtQuantity.setText(String.valueOf(productModel.getQuantity()));
-        holder.edtDescription.setText(productModel.getDescription());
-        Glide.with(context).load(productModel.getImageProduct()).into(holder.imProduct);
+        ProductModel productModel1 = productModels.get(position);
+        holder.edtNameProduct.setText(productModel1.getName());
+        holder.edtIdCategory.setText(String.valueOf(productModel1.getIdCategory()));
+        holder.edtPrice.setText(String.valueOf(productModel1.getPrice()));
+        holder.edtQuantity.setText(String.valueOf(productModel1.getQuantity()));
+        holder.edtDescription.setText(productModel1.getDescription());
+        Glide.with(context).load(productModel1.getImageProduct()).into(holder.imProduct);
         holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
-            ProductModel productModel = updateProduct(holder);
+
             @Override
             public void onClick(View v) {
-                BaseAPIService.createService(IProductService.class).updateProduct("Bearer" + token, productModel.getName(), productModel.getIdCategory(),
+                ProductModel productModel = updateProduct(holder, productModel1.getId());
+                BaseAPIService.createService(IProductService.class).updateProduct("Bearer " + token, productModel.getName(), productModel.getIdCategory(),
                         productModel.getDescription(), productModel.getPrice(), productModel.getQuantity(), productModel.getId()).enqueue(new Callback<ProductModel>() {
                     @Override
                     public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
+                        System.out.println(productModel.getId());
                         Toast.makeText(context, "Update product thành công", Toast.LENGTH_SHORT).show();
                         context.startActivity(new Intent(context, MainActivity.class));
                     }
@@ -88,7 +90,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaseAPIService.createService(IProductService.class).deleteProduct("Bearer " +token, productModel.getId()).enqueue(new Callback<ProductModel>() {
+                BaseAPIService.createService(IProductService.class).deleteProduct("Bearer " +token, productModel1.getId()).enqueue(new Callback<ProductModel>() {
                     @Override
                     public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
                         context.startActivity(new Intent(context, MainActivity.class));
@@ -104,7 +106,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         });
     }
 
-    private ProductModel updateProduct(ProductAdapter.ViewHolder holder){
+    private ProductModel updateProduct(ProductAdapter.ViewHolder holder, int productId){
         ProductModel productModel = new ProductModel(
                 holder.edtNameProduct.getText().toString().trim(),
                 Integer.parseInt(holder.edtIdCategory.getText().toString().trim()),
@@ -112,6 +114,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 Double.parseDouble(holder.edtPrice.getText().toString().trim()),
                 Integer.parseInt(holder.edtQuantity.getText().toString().trim())
         );
+        productModel.setId(productId);
         return productModel;
     }
     @Override

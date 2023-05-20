@@ -35,5 +35,13 @@ public interface IProductService {
                                      @Field("price") double price,
                                      @Field("quantity") int quantity,
                                      @Field("productId") int productId);
+    @FormUrlEncoded
+    @POST("/product/addProduct")
+    Call<ProductModel> addProduct(@Header("Authorization") String token,
+                                     @Field("productName") String productName,
+                                     @Field("idCategory") int idCategory,
+                                     @Field("description") String description,
+                                     @Field("price") double price,
+                                     @Field("quantity") int quantity);
 
 }
