@@ -59,6 +59,9 @@ public class HomeActivity extends BaseActivity implements ProductAdapter.iClickL
                 if (!query.isEmpty()) {
                     searchProduct(query);
                 }
+                else {
+
+                }
                 return false;
             }
             @Override
@@ -109,6 +112,10 @@ public class HomeActivity extends BaseActivity implements ProductAdapter.iClickL
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
                 products = response.body();
                 productAdapter.updateProducts(products);
+                System.out.println(products);
+                if(products.isEmpty()){
+                    Toast.makeText(HomeActivity.this, "Không tìm thấy sản phẩm cần tìm", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {

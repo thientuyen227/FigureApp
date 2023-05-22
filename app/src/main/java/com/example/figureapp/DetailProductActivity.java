@@ -30,9 +30,8 @@ public class DetailProductActivity extends BaseActivity {
     private ProductAdapter productAdapter;
     private ImageView productImageView;
     private TextView productNameTextView;
-    private TextView quantityTextView;
     private TextView descriptionTextView;
-    private Button addToCartButton;
+    private TextView tvPrice;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +54,7 @@ public class DetailProductActivity extends BaseActivity {
                     Glide.with(DetailProductActivity.this).load(product.getImageProduct()).into(productImageView); // Load ảnh vào ImageView
                     productNameTextView.setText(product.getName()); // Set tên sản phẩm
                     descriptionTextView.setText(product.getDescription());
+                    tvPrice.setText(String.valueOf(product.getPrice()));
                 }
             }
             @Override
@@ -67,6 +67,7 @@ public class DetailProductActivity extends BaseActivity {
         productImageView = findViewById(R.id.product_image);
         productNameTextView = findViewById(R.id.product_name);
         descriptionTextView = findViewById(R.id.tv_descriptionProduct);
+        tvPrice = findViewById(R.id.tvPrice);
     }
     private void initData() {
         products = new ArrayList<>();

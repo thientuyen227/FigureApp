@@ -49,20 +49,20 @@ public class CategoryActivity extends BaseActivity {
             public void onResponse(Call<ArrayList<CategoryModel>> call, Response<ArrayList<CategoryModel>> response) {
                 categorys = response.body();
                 categoryAdapter = new CategoryAdapter(categorys,CategoryActivity.this);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CategoryActivity.this, LinearLayoutManager.VERTICAL, false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(CategoryActivity.this
+                        , LinearLayoutManager.VERTICAL, false);
                 rvCategory.setLayoutManager(linearLayoutManager);
                 rvCategory.setAdapter(categoryAdapter);
-                categoryAdapter.notifyDataSetChanged();
                 btnAdd.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         String categoryName = tvNameCategory.getText().toString().trim();
-
-                        BaseAPIService.createService(ICategoryService.class).addCategory("Bearer " + token, categoryName).enqueue(new Callback<CategoryModel>() {
+                        BaseAPIService.createService(ICategoryService.class).addCategory("Bearer " + token
+                                , categoryName).enqueue(new Callback<CategoryModel>() {
                             @Override
                             public void onResponse(Call<CategoryModel> call, Response<CategoryModel> response) {
                                 loadCategory();
-                                Toast.makeText(CategoryActivity.this, "Update user thành công", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(CategoryActivity.this, "Add category thành công", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(CategoryActivity.this, MainActivity.class));
                             }
 

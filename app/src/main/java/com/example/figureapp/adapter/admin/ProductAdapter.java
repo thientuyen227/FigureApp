@@ -66,37 +66,37 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.edtDescription.setText(productModel1.getDescription());
         Glide.with(context).load(productModel1.getImageProduct()).into(holder.imProduct);
         holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 ProductModel productModel = updateProduct(holder, productModel1.getId());
-                BaseAPIService.createService(IProductService.class).updateProduct("Bearer " + token, productModel.getName(), productModel.getIdCategory(),
-                        productModel.getDescription(), productModel.getPrice(), productModel.getQuantity(), productModel.getId()).enqueue(new Callback<ProductModel>() {
+                BaseAPIService.createService(IProductService.class).updateProduct("Bearer " + token, productModel.getName()
+
+                        , productModel.getIdCategory(),
+                        productModel.getDescription(), productModel.getPrice(), productModel.getQuantity()
+                        , productModel.getId()).enqueue(new Callback<ProductModel>() {
                     @Override
                     public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
                         System.out.println(productModel.getId());
                         Toast.makeText(context, "Update product thành công", Toast.LENGTH_SHORT).show();
                         context.startActivity(new Intent(context, MainActivity.class));
                     }
-
                     @Override
                     public void onFailure(Call<ProductModel> call, Throwable t) {
                         Toast.makeText(context, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaseAPIService.createService(IProductService.class).deleteProduct("Bearer " +token, productModel1.getId()).enqueue(new Callback<ProductModel>() {
+                BaseAPIService.createService(IProductService.class).deleteProduct("Bearer " +token
+                        , productModel1.getId()).enqueue(new Callback<ProductModel>() {
                     @Override
                     public void onResponse(Call<ProductModel> call, Response<ProductModel> response) {
                         context.startActivity(new Intent(context, MainActivity.class));
                         Toast.makeText(context, "Đã xóa product thành công", Toast.LENGTH_SHORT).show();
                     }
-
                     @Override
                     public void onFailure(Call<ProductModel> call, Throwable t) {
                         Toast.makeText(context, "Đã có lỗi xảy ra", Toast.LENGTH_SHORT).show();

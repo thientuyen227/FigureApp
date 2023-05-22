@@ -39,13 +39,13 @@ public class ProductActivity extends BaseActivity {
         loadProducts();
     }
     private void loadProducts(){
-
         BaseAPIService.createService(IProductService.class).getAllProducts().enqueue(new Callback<ArrayList<ProductModel>>() {
             @Override
             public void onResponse(Call<ArrayList<ProductModel>> call, Response<ArrayList<ProductModel>> response) {
                 productModels = response.body();
                 productAdapter = new ProductAdapter(productModels, ProductActivity.this);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.VERTICAL, false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ProductActivity.this, LinearLayoutManager.VERTICAL
+                        , false);
                 rc_product.setLayoutManager(linearLayoutManager);
                 rc_product.setAdapter(productAdapter);
                 btnAdd.setOnClickListener(new View.OnClickListener() {
@@ -55,10 +55,8 @@ public class ProductActivity extends BaseActivity {
                     }
                 });
             }
-
             @Override
             public void onFailure(Call<ArrayList<ProductModel>> call, Throwable t) {
-
             }
         });
     }

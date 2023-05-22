@@ -89,8 +89,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update"
+            android:text="Add product"
             android:backgroundTint="@color/colorPrimary"
+            android:layout_gravity="center"
             android:layout_marginRight="8dp"
             android:id="@+id/btnAdd"
             android:textSize="14dp"/>

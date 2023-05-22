@@ -62,7 +62,8 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         holder.btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaseAPIService.createService(ICategoryService.class).deleteCategory("Bearer "+ token, categoryModel.getId()).enqueue(new Callback<CategoryModel>() {
+                BaseAPIService.createService(ICategoryService.class).deleteCategory("Bearer "+ token
+                        , categoryModel.getId()).enqueue(new Callback<CategoryModel>() {
                     @Override
                     public void onResponse(Call<CategoryModel> call, Response<CategoryModel> response) {
                         context.startActivity(new Intent(context, MainActivity.class));
@@ -77,11 +78,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             }
         });
         holder.btnUpdate.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View v) {
                 String categoryName = holder.edtNameCategory.getText().toString().trim();
-                BaseAPIService.createService(ICategoryService.class).editCategory("Bearer " + token, categoryModel.getId(),categoryName ).enqueue(new Callback<CategoryModel>() {
+                if (categoryName.isEmpty()){
+                    Toast.makeText(context, "Vui lòng nhập Name Category", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                BaseAPIService.createService(ICategoryService.class).editCategory("Bearer " + token
+                        , categoryModel.getId(),categoryName ).enqueue(new Callback<CategoryModel>() {
                     @Override
                     public void onResponse(Call<CategoryModel> call, Response<CategoryModel> response) {
                         Toast.makeText(context, "Update Category thành công", Toast.LENGTH_SHORT).show();

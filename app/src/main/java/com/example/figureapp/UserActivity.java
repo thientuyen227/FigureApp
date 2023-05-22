@@ -42,7 +42,8 @@ public class UserActivity extends BaseActivity {
             public void onResponse(Call<ArrayList<User>> call, Response<ArrayList<User>> response) {
                 users = response.body();
                 userAdapter = new UserAdapter(users, UserActivity.this);
-                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserActivity.this, LinearLayoutManager.VERTICAL, false);
+                LinearLayoutManager linearLayoutManager = new LinearLayoutManager(UserActivity.this
+                        , LinearLayoutManager.VERTICAL, false);
                 userRecyclerView.setLayoutManager(linearLayoutManager);
                 userRecyclerView.setAdapter(userAdapter);
             }
